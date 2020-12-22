@@ -1,7 +1,7 @@
 * Introduction
   * [ Why write this blog ](introduction/why-write-this-blog.md)
 * Golang
-  * [ 迁移mgo到qmgo实现MongoDB事务等特性支持 ](golang/move-to-qmgo.md)
+  * [ Migrate mgo to qmgo to support features such as MongoDB transactions ](golang/migrate-mgo-to-qmgo.md)
 * Git
   * [Common operations of Git](git/common-operations-of-git.md)
 * DevOps

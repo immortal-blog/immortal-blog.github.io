@@ -1,9 +1,16 @@
-## 前言
+# Migrate mgo to qmgo to support features such as MongoDB transactions
 
-mgo 是一个方便的 golang 操作 mongodb 的库，但是它对 mongodb 的最新特性的支持不足。  
-偏偏老项目是用 mgo 写的，如果要迁移到官方的 mongo-driver，官方的 mongo-driver 的封装更原始，用法差异较大，迁移成本会比较高。这时候我发现了一个 qmgo 库，是基于官方 mongo-driver
-的封装，但是语法上更接近 mgo，适合我进行简单粗暴的迁移。  
-下面我记录一下迁移过程中使用的方法，是我自己摸索出来的，如果有问题欢迎指正。
+## Preface
+
+Mgo is a convenient library for golang to operate mongodb, but it does not
+support the latest features of mongodb. The old project is written in mgo. If
+you want to migrate to the official mongo-driver, its syntax is more primitive,
+the usage difference is large, and the migration cost will be higher.  
+I found a library called qmgo, which is based on the official mongo-driver
+package, but it is closer to mgo in terms of syntax and suitable for simple and
+rude migrations.  
+Below I will record the methods used in the migration process, which I found out
+by myself. If you have any questions, please correct me.
 
 ## 批量替换大法
 
