@@ -1,7 +1,16 @@
 # Why write this blog
 
-1. 人的记忆十分不可靠，很容易淡忘，只有用文字永久性记录下来，才能更长久地保持自己的记忆。
-2. 互联网上也有很多的好内容值得收藏，但是别人的博客不一定稳定可靠，有可能今天还在那里，过几天就挂了关闭了，要可靠记录还得靠自己，自己理解、吸收、整理后的知识也更深刻。
-3. 我也希望自己长生不老、永生不死，但是这并不现实。希望这是一个“不朽”的博客，让我的知识和记忆永存。
-4. 这已经是我第N个博客了，数不清第几个了。人生在每一个阶段可能都有不同的想法，而这些想法并非都适合分享。
-5. 这个博客就纯粹作为技术博客，记录技术性的内容。想法可能会变，技术是不朽的，真理是不朽的。
+1. Human memory is very unreliable and easy to forget. Only by recording it
+   permanently in words can you keep your memory for a longer time.
+2. There are also many good content on the Internet that are worth collecting,
+   but other people’s blogs are not necessarily stable and reliable. It is
+   possible that they are still there today and will be closed after a few days.
+   You have to rely on yourself to record reliably. After the knowledge is
+   summarized and sorted out by myself, I also understand it more deeply.
+3. I also hope that I will live forever, but this is not realistic. I hope this
+   is an "immortal" blog that will perpetuate my knowledge and memory.
+4. This is not my first blog, and maybe it is not the last. There may be
+   different ideas at every stage of life, and not all of these ideas are
+   suitable for sharing.
+5. This blog is purely a technical blog, recording technical content. Ideas may
+   change, technology is immortal, and truth is immortal.
