@@ -1,11 +1,11 @@
-# Migrate mgo to qmgo to support features such as MongoDB transactions
+# Migrate mgo to qmgo
 
-## Preface
+## What it qmgo
 
 Mgo is a convenient library for golang to operate mongodb, but it does not
-support the latest features of mongodb. The old project is written in mgo. If
-you want to migrate to the official mongo-driver, its syntax is more primitive,
-the usage difference is large, and the migration cost will be higher.  
+support the latest features of mongodb. My old project is written in mgo. If I
+want to migrate to the official mongo-driver, its syntax is more primitive, the
+usage difference is large, and the migration cost will be higher.  
 I found a library called qmgo, which is based on the official mongo-driver
 package, but it is closer to mgo in terms of syntax and suitable for simple and
 rude migrations.  
