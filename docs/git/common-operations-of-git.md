@@ -2,14 +2,14 @@
 
 ### Commit code
 
-```
+```bash
 git add .
 git commit -m "feat: xxxxxx"
 ```
 
 ### How to revoke after commit
 
-```
+```bash
 git reset --soft HEAD^
 ```
 

@@ -49,13 +49,13 @@ return true
 
 - Replace the bson.ObjectIdHex() method:
 
-```
+```go
 func ObjectIDHex(hex string) primitive.ObjectID {
-	id, err := primitive.ObjectIDFromHex(hex)
-	if err != nil {
-		panic(fmt.Sprintf("Invalid input to ObjectIDHex: %+v", hex))
-	}
-	return id
+id, err := primitive.ObjectIDFromHex(hex)
+if err != nil {
+panic(fmt.Sprintf("Invalid input to ObjectIDHex: %+v", hex))
+}
+return id
 }
 ```
 
