@@ -38,24 +38,37 @@ please correct me.
 - Replace the bson.IsObjectIdHex() method:
 
 ```go
+package db
+
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
 func IsObjectIDHex(hex string) bool {
-_, err := primitive.ObjectIDFromHex(hex)
-if err != nil {
-return false
-}
-return true
+	_, err := primitive.ObjectIDFromHex(hex)
+	if err != nil {
+		return false
+	}
+	return true
 }
 ```
 
 - Replace the bson.ObjectIdHex() method:
 
 ```go
+package db
+
+import (
+	"fmt"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+)
+
 func ObjectIDHex(hex string) primitive.ObjectID {
-id, err := primitive.ObjectIDFromHex(hex)
-if err != nil {
-panic(fmt.Sprintf("Invalid input to ObjectIDHex: %+v", hex))
-}
-return id
+	id, err := primitive.ObjectIDFromHex(hex)
+	if err != nil {
+		panic(fmt.Sprintf("Invalid input to ObjectIDHex: %+v", hex))
+	}
+	return id
 }
 ```
 
