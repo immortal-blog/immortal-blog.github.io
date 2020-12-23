@@ -14,25 +14,24 @@ please correct me.
 
 ## Batch replacement
 
-- Batch replace **github.com/globalsign/mgo/bson** with **go.mongodb.org/mongo-driver/bson**
-- Batch replace **bson.NewObjectId()** with **primitive.NewObjectID()**
-- Batch replace **bson.ObjectId** with **primitive.ObjectID**
-- Batch replace **.Find(bson.M** with **.Find(c, bson.M**
-- Batch replace **.Find(search** to **.Find(c, search**
-- Batch replace **.Insert(** to **.InsertOne(c,**
-- Batch replace **.Update(** to **.UpdateOne(c,**
-- Batch replace **.RemoveAll(** to **.RemoveAll(c,**
-- Batch replace **.Remove(** to **.Remove(c,**
-- Batch replace **errors.Is(err, mgo.ErrNotFound)** with **
-  qmgo.IsErrNoDocuments(err)**
-- Batch replace **.EnsureIndex(mgo.Index{** for
-  **.CreateOneIndex(c, options.IndexModel{**
+- Batch replace `github.com/globalsign/mgo/bson` with `go.mongodb.org/mongo-driver/bson`
+- Batch replace `bson.NewObjectId()` with `primitive.NewObjectID()`
+- Batch replace `bson.ObjectId` with `primitive.ObjectID`
+- Batch replace `.Find(bson.M` with `.Find(c, bson.M`
+- Batch replace `.Find(search` to `.Find(c, search`
+- Batch replace `.Insert(` to `.InsertOne(c,`
+- Batch replace `.Update(` to `.UpdateOne(c,`
+- Batch replace `.RemoveAll(` to `.RemoveAll(c,`
+- Batch replace `.Remove(` to `.Remove(c,`
+- Batch replace `errors.Is(err, mgo.ErrNotFound)` with `qmgo.IsErrNoDocuments(err)`
+- Batch replace `.EnsureIndex(mgo.Index{` for
+  `.CreateOneIndex(c, options.IndexModel{`
 
 ## Copy and paste
 
-- Where there is no context, copy and paste everywhere **c := context.Background()**
-- If it is in the interface method of gin, you can directly use gin's **c \*gin.Context** (but if multi-coroutine
-  operation needs to Copy gin's Context)
+- Where there is no context, copy and paste everywhere `c := context.Background()`
+- If it is in the interface method of gin, you can directly use gin's `c *gin.Context` (but if multi-coroutine operation
+  needs to Copy gin's Context)
 
 ## Function substitution
 
