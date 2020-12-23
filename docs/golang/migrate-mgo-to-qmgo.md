@@ -37,13 +37,13 @@ please correct me.
 
 - Replace the bson.IsObjectIdHex() method:
 
-```
+```go
 func IsObjectIDHex(hex string) bool {
-	_, err := primitive.ObjectIDFromHex(hex)
-	if err != nil {
-		return false
-	}
-	return true
+_, err := primitive.ObjectIDFromHex(hex)
+if err != nil {
+return false
+}
+return true
 }
 ```
 
