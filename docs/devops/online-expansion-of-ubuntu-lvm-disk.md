@@ -2,7 +2,7 @@
 
 ## LVM overview
 
-![lvm.png](lvm.png)
+![img.png](lvm.png)
 
 ### Physical Volume (PV)
 
@@ -133,7 +133,6 @@ tmpfs                            3.2G   19M  3.2G   1% /run
 ### Resize file system
 
 ```bash
-
 ~# resize2fs -p /dev/mapper/ubuntu--vg-root
 resize2fs 1.44.1 (24-Mar-2018)
 Filesystem at /dev/mapper/ubuntu--vg-root is mounted on /; on-line resizing required
@@ -150,3 +149,7 @@ udev                              16G     0   16G   0% /dev
 tmpfs                            3.2G   59M  3.1G   2% /run
 /dev/mapper/ubuntu--vg-root      689G  5.4G  655G   1% /
 ```
+
+## How to reduce the LV size
+
+You can use the `lvreduce` command.
