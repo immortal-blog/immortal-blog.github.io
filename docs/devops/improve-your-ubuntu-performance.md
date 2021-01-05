@@ -6,6 +6,8 @@ My experiments found that the improvement was very noticeable, based on Ubuntu 2
 
 ## use s-tui to monitor and test your max CPU frequency
 
+![s-tui.png](s-tui.png)
+
 ### how to install
 
 ```bash
@@ -23,6 +25,8 @@ You can use the arrow keys and space bar to switch between Monitor mode and Stre
 stress test on the CPU.
 
 ## use indicator-cpufreq to set your CPU frequency
+
+![indicator-cpufreq.png](indicator-cpufreq.png)
 
 ### how to install
 
