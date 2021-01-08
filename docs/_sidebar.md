@@ -2,6 +2,7 @@
     * [ Why write this blog ](introduction/why-write-this-blog.md)
 * Golang
     * [ Migrate mgo to qmgo ](golang/migrate-mgo-to-qmgo.md)
+    * [ Use pprof for golang program memory analysis ](golang/use-pprof-for-golang-program-memory-analysis.md)
 * Git
     * [Common operations of Git](git/common-operations-of-git.md)
 * DevOps
