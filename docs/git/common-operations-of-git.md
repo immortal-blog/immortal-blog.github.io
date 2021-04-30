@@ -37,3 +37,16 @@ git push
 ```
 
 This method will only migrate the current branch to the new git.
+
+### How to save username and password of git in Ubuntu
+
+```bash
+nano ~/.gitconfig
+```
+
+Edit the config file and set this config:
+
+```
+[credential]  
+    helper = store
+```
