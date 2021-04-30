@@ -36,4 +36,4 @@ git remote set-url origin remote_git_address
 git push
 ```
 
-This method will only migrate the current branch to the new git
+This method will only migrate the current branch to the new git.
