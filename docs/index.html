@@ -17,15 +17,7 @@
 <div id="app"></div>
 <script>
     window.$docsify = {
-        plugins: [
-            function (hook, vm) {
-                hook.beforeEach(function (html) {
-                    return (
-                        'Last modified: {docsify-updated}' + '\n----\n' + html
-                    );
-                });
-            }
-        ],
+        formatUpdated: '{YYYY}-{MM}-{DD}',
         name: 'Immortal Blog',
         repo: '',
         auto2top: true,
