@@ -17,7 +17,15 @@
 <div id="app"></div>
 <script>
     window.$docsify = {
-        formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}',
+        plugins: [
+            function (hook, vm) {
+                hook.beforeEach(function (html) {
+                    return (
+                        'Last modified: {docsify-updated}' + '\n----\n' + html
+                    );
+                });
+            }
+        ],
         name: 'Immortal Blog',
         repo: '',
         auto2top: true,
