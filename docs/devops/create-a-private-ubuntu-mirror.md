@@ -17,3 +17,19 @@ apt-mirror supports 20 threads to download at the same time by default. If you c
 download speed can reach the maximum of my network. However, it does not seem to make a comparison. Although it can
 speed up the download start speed, sometimes some files may be lost, resulting in an incomplete mirror, so the client
 cannot be updated.
+
+### how to write the config file
+
+In order to download the complete package, we need to modify the configuration file in `/etc/apt/mirror.list`. Use this
+format to ensure that the i386 package will be downloaded.
+
+```
+deb-amd64 http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse
+deb-i386 http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse
+```
+
+## Combine them together
+
+Therefore, in order to achieve a balance between efficiency and completeness, we can combine apt-mirror and debmirror.
+We can first use apt-mirror to download quickly, then we can use debmirror to check and download the missing packages.
+Maybe this is the best way to download the Ubuntu mirror.
