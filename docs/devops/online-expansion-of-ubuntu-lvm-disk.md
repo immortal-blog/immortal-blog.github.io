@@ -55,7 +55,7 @@ example `/dev/sdb1`.
   System ID
   Format                lvm2
   ......
-````
+```
 
 ### Add the new partition to the original VG of lvm
 
@@ -88,7 +88,7 @@ You should find that there are some free space in the volume group.
   Total PE              194302
   Alloc PE / Size       15103 / <59.00 GiB
   Free  PE / Size       179199 / <700.00 GiB
-````
+```
 
 ### Check the LV
 

@@ -11,5 +11,6 @@
   * [Create a private Ubuntu mirror](devops/create-a-private-ubuntu-mirror.md)
   * [Monitor the temperature and health status of nvme ssd in Ubuntu](devops/monitor-nvme-ssd-status.md)
   * [Create socks server on Ubuntu 20.04](devops/create-socks-server-on-ubuntu20.04.md)
+  * [Send Email With Postfix On Ubuntu](devops/send-email-with-postfix-on-ubuntu.md)
 * Frontend
   * [Install Node.js on Linux](frontend/install-nodejs-on-linux.md)
