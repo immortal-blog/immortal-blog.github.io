@@ -1,0 +1,685 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  
+    <script src="/js/marked.js"></script>
+    <script src="/js/comment.js"></script>
+    <script src="/js/timeago.min.js"></script>
+    <script src="/js/highlight.min.js"></script>
+	<script src="/js/spin.min.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?82ff380f5606c5d7dd7903f7ac40271b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>Immortal Blog<span class="blink-fast">∎</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		An awesome blog about software development and network security.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html" >How to enable mouse side buttons on a Vmware VM</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2023-02-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Close the VM.<br>Edit the .vmx file and add this config:  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mouse.vusb.enable = &quot;TRUE&quot;</span><br><span class="line">mouse.vusb.useBasicMouse = &quot;FALSE&quot;</span><br><span class="line">usb.generic.allowHID = &quot;TRUE&quot;</span><br></pre></td></tr></table></figure>
+<p>Save the .vmx file.<br>Start the VM and you can see that you can use the mouse side buttons to move forward and backward on the web page.</p>
+
+	
+	</div>
+  <a type="button" href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html" >Remove News Widgets of Windows 11 to Improve Performance</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-11-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Widgets are a new feature introduced by Microsoft in Windows 11.<br>Currently, the news and interest modules that are enabled by default in widgets provide various kinds of information.</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget uninstall MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy</span><br></pre></td></tr></table></figure>
+
+<p>For each new Windows 11 computer, I strongly recommand this command to improve the performance a lot.</p>
+
+	
+	</div>
+  <a type="button" href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/privacy/personal-note-editing-software-research.html" >Personal note editing software research</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-10-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Personal-note-editing-needs"><a href="#Personal-note-editing-needs" class="headerlink" title="Personal note editing needs"></a>Personal note editing needs</h2><h3 id="Core-requirements"><a href="#Core-requirements" class="headerlink" title="Core requirements:"></a>Core requirements:</h3><ul>
+<li>Edit and save content in markdown format, which makes the format simple, easy to use, open, and easy to migrate</li>
+<li>Support WYSIWYG mode when editing, similar to Typora</li>
+<li>Open source, thus keeping content safe and free</li>
+<li>Support offline use, data can be stored locally, or stored in third-party channels such as Google Drive, Github repository</li>
+<li>Support direct copying of pictures and text on web pages and paste them directly</li>
+<li>Open the folder and display the file directory structure, which is convenient for placing and organizing notes according to the file directory from the sidebar</li>
+<li>Supports the creation of internal links between markdown files, which can be easily jumped</li>
+<li>Supports relationship graphs showing internal links in documents</li>
+</ul>
+<h3 id="Optional-Requirements"><a href="#Optional-Requirements" class="headerlink" title="Optional Requirements"></a>Optional Requirements</h3><ul>
+<li>Supports loading plugins to extend functionality</li>
+<li>Open the online version editor directly from the web browser, call the file API to open the local folder for editing, therefore even chromebook can use it</li>
+</ul>
+<h2 id="Software-solutions"><a href="#Software-solutions" class="headerlink" title="Software solutions"></a>Software solutions</h2><ul>
+<li>✅<strong>Logseq</strong> : Not perfect, but currently the most recommended</li>
+<li>Advantages:<ul>
+<li>Open source, most functions are as easy to use as Obsidian, such as beautiful appearance, local data storage, support for bidirectional links and relationship graphs</li>
+<li>There is a web version, you can directly open the local folder</li>
+</ul>
+</li>
+<li>Shortcomings:<ul>
+<li>The directory structure browsing is not supported, and all the notes are mixed together and it is not easy to classify. Solution: If you find a way to write a “navigation document”, similar to the Yellow Pages, and then bookmark it, and add a link to the Yellow Pages every time you add a sub-document, it may also be a convenient way to find files by category. This is still not convenient like a directory, but it can be adapted.</li>
+<li>Does not support the rendering the md standard checkbox.</li>
+</ul>
+</li>
+<li>❗<strong>Notion</strong>: It is basically free and easy to use, but there is no offline version, you cannot save data locally and synchronize data in your own way, which brings hidden dangers in data security and privacy, so you cannot use it with confidence. However, it supports the use of online real-time collaboration scenarios and can be used on projects, but is not suitable for storing personal core data.</li>
+<li>❗<strong>Obsidian</strong>: It is completely free, easy to use, and supports all requirements except open source, but it is not open source. There is currently no better option for personal use.</li>
+<li>❗<strong>VSCode+Office Viewer plugin</strong> (based on vditor): open source, md editing function is very powerful, and there is a toolbar. But bidirectional links and relational graphs are not supported. It can be said to be a good md editor, but not a very good note editor. And this plugin does not support running in the VSCode web.</li>
+</ul>
+	
+	</div>
+  <a type="button" href="/privacy/personal-note-editing-software-research.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/copy_and_paste_content_to_markdown.html" >Copy and paste content to markdown</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-08-06  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Today I wanted to practice on Leetcode, and then I opened <a target="_blank" rel="noopener" href="https://github.com/phodal/2md">https://github.com/phodal/2md</a> to save the problem to local.<br>Because I found that there were some small problems with this tool, I forked a copy and fixed some errors that it would generate when converting the content of the leetcode problem.<br>In this way, copy the problem of leetcode and paste it into my 2md, and then copy the converted markdown to save it locally.<br>Repo: <a target="_blank" rel="noopener" href="https://github.com/immortalt/2md">https://github.com/immortalt/2md</a><br>The displayed format is correct, and the effect is much better.<br>The online address of my 2md: <a href="https://immortal-blog.github.io/tomd/">https://immortal-blog.github.io/tomd/</a></p>
+
+	
+	</div>
+  <a type="button" href="/devops/copy_and_paste_content_to_markdown.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html" >How to mount VMware shared folder to ubuntu on boot</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-06-04  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Sometimes the shared folder function of VMware Workstation may suddenly not work after rebooting.<br>There are several ways to fix it.</p>
+<h2 id="mount-by-a-command"><a href="#mount-by-a-command" class="headerlink" title="mount by a command"></a>mount by a command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs,allow_other -o nonempty</span><br></pre></td></tr></table></figure>
+<p>This command means to mount all host shared folders to <code>/mnt/hgfs</code>, which is the default operation that VMware should have done automatically.<br>However, the folder would disappear after rebooting.</p>
+<h2 id="mount-automatically"><a href="#mount-automatically" class="headerlink" title="mount automatically"></a>mount automatically</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>We can edit the <code>fstab</code> file to write the auto-mount configuration. Just add one line:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.host:/ /mnt/hgfs fuse.vmhgfs-fuse allow_other,defaults 0 0</span><br></pre></td></tr></table></figure>
+
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/idea/practical-advice-for-python3-algorithm-practice.html" >Practical advice for python3 algorithm practice</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-21  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="When-dividing-be-careful-with-large-numbers"><a href="#When-dividing-be-careful-with-large-numbers" class="headerlink" title="When dividing, be careful with large numbers"></a>When dividing, be careful with large numbers</h2><p>Sample: they should be different, but due to the float format, they become the same.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span> - <span class="number">500000000</span>) / (<span class="number">1</span> - <span class="number">499999999</span>)</span><br><span class="line">b = (<span class="number">500000000</span> - <span class="number">1000000000</span>) / (<span class="number">499999999</span> - <span class="number">999999998</span>)</span><br><span class="line"><span class="built_in">print</span>(a, b, a == b)</span><br><span class="line"><span class="comment"># 1.000000002 1.000000002 True</span></span><br></pre></td></tr></table></figure>
+
+<p>In this situation, we can just simply use Decimal.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line">a = Decimal(<span class="number">1</span> - <span class="number">500000000</span>) / Decimal(<span class="number">1</span> - <span class="number">499999999</span>)</span><br><span class="line">b = Decimal(<span class="number">500000000</span> - <span class="number">1000000000</span>) / Decimal(<span class="number">499999999</span> - <span class="number">999999998</span>)</span><br><span class="line"><span class="built_in">print</span>(a, b, a == b)</span><br><span class="line"><span class="comment"># 1.000000002000000008000000032 1.000000002000000004000000008 False</span></span><br></pre></td></tr></table></figure>
+	
+	</div>
+  <a type="button" href="/idea/practical-advice-for-python3-algorithm-practice.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html" >How to run VMWare 16.2.3 on Ubuntu 22.04</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Currently (2022-05-16), we cannot install and run VMWare Workstation 16.2.3 on Ubuntu Desktop 22.04 LTS.<br>You can installed it and see the icon, but when you try to open it, it would ask you to install some modules and would fail.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Here is a script that are verified by me that can solve the problem.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mkubecek/vmware-host-modules</span><br><span class="line"><span class="built_in">cd</span> vmware-host-modules</span><br><span class="line">git checkout workstation-16.2.3</span><br><span class="line">sudo make ; sudo make install</span><br><span class="line">sudo modprobe -a vmw_vmci vmmon vmnet</span><br></pre></td></tr></table></figure>
+
+<p>Then you may need to reboot the host system to make VM networks working.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Although Ubuntu 22.04 is a LTS version, it is not stable and compatible enough to deal with daily works currently. My advice is to use Ubuntu 20.04.</p>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-enable-font-ligatures-in-vscode.html" >How to enable font ligatures in VSCode</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="What-are-font-ligatures？"><a href="#What-are-font-ligatures？" class="headerlink" title="What are font ligatures？"></a>What are font ligatures？</h2><p><img src="https://user-images.githubusercontent.com/76415903/167493317-ee5c86e9-297f-4ebe-a9c4-8580216401ce.png" alt="image"><br>It’s an interesting feature in fonts like JetBrains Mono.</p>
+<h2 id="I-have-enabled-Jetbrains-Mono-but-why-not-see-font-ligatures？"><a href="#I-have-enabled-Jetbrains-Mono-but-why-not-see-font-ligatures？" class="headerlink" title="I have enabled Jetbrains Mono, but why not see font ligatures？"></a>I have enabled Jetbrains Mono, but why not see font ligatures？</h2><p>I think VSCode or Word disables this feature by default, and we need to change font options to enable this feature.</p>
+<h2 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h2><p>Open “Menu”-“Setting”, open “setting.json”, and change this option:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.fontLigatures&quot;: true</span><br></pre></td></tr></table></figure>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-enable-font-ligatures-in-vscode.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/privacy/how-to-chat-safely-online.html" >How to chat safely online</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-04-23  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Symmetric-encryption-communication"><a href="#Symmetric-encryption-communication" class="headerlink" title="Symmetric encryption communication"></a>Symmetric encryption communication</h2><p>The most straightforward way is that you can decide on an encryption key in reality and use symmetric encryption such as AES-256 to encrypt and decrypt all messages.<br>But it’s not convenient to exchange the key online. Because if you send the key using an unsafe channel that is being monitored, the attacker can also get the key and decrypt all your messages. The attacker can directly use <strong>passive attack</strong> (read-only, without any modification) to monitor the messages.<br>One way is to use asymmetric encryption communication.</p>
+<h2 id="Asymmetric-encryption-communication"><a href="#Asymmetric-encryption-communication" class="headerlink" title="Asymmetric encryption communication"></a>Asymmetric encryption communication</h2><p>The mechanism of asymmetric encryption can be that A and B each generate a set of public keys and private keys and then use the other one’s public key to encrypt the content and send it, and the other one can decrypt it with its private key after receiving it.<br>Therefore, even if the attacker gets A and B’s public keys, he cannot decrypt the messages because he needs to know the private key.<br>But it’s still not perfect.</p>
+<h3 id="MITM-attack-in-asymmetric-encryption-communication"><a href="#MITM-attack-in-asymmetric-encryption-communication" class="headerlink" title="MITM attack in asymmetric encryption communication"></a>MITM attack in asymmetric encryption communication</h3><p>MITM means man-in-the-middle attack. Suppose you generate a public key and a private key for two clients, A and B, and then exchange the public keys of the two through a server C, and the server C is not secure. It is useless to monitor the public keys because only obtaining the public key cannot decrypt messages with the private key, so it cannot be monitored. But suppose B’s public key is replaced by C, and A uses this replaced public key C to encrypt messages. In that case, server C decrypts it with C’s private key, encrypts it with B’s public key, and B decrypts it with its private key. A and B have no sense, and C succeeds in a man-in-the-middle attack. Even if a secure key exchange technology such as the D-H key exchange method is used, the key exchange process can still be relayed by server C as a middleman.<br>The attacker cannot directly use <strong>passive attack</strong> to monitor the messages in asymmetric encryption communication. The attacker needs to manipulate and change the communication flow.</p>
+	
+	</div>
+  <a type="button" href="/privacy/how-to-chat-safely-online.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-detect-and-solve-port-occupancy-in-linux.html" >How to detect and solve port occupancy in linux</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-03-06  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Sometimes we may find that a program is occupying a port, and we cannot use this port.<br>We can use two commands to solve this problem.</p>
+<h3 id="Find-the-program"><a href="#Find-the-program" class="headerlink" title="Find the program"></a>Find the program</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp | grep 4000</span><br><span class="line">tcp6       0      0 :::4000                 :::*                    LISTEN      81970/hexo</span><br></pre></td></tr></table></figure>
+
+<p>Here we can find the pid 81970 before the program name.</p>
+<h3 id="Kill-the-program"><a href="#Kill-the-program" class="headerlink" title="Kill the program"></a>Kill the program</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 81970</span><br></pre></td></tr></table></figure>
+
+<p>If the permissions are not enough, add sudo before the command.</p>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-detect-and-solve-port-occupancy-in-linux.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+           <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+        
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/2/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/devops/">devops<span>12</span></a></li>
+		
+			<li><a href="/categories/frontend/">frontend<span>1</span></a></li>
+		
+			<li><a href="/categories/git/">git<span>1</span></a></li>
+		
+			<li><a href="/categories/golang/">golang<span>2</span></a></li>
+		
+			<li><a href="/categories/idea/">idea<span>4</span></a></li>
+		
+			<li><a href="/categories/privacy/">privacy<span>1</span></a></li>
+		
+			<li><a href="/categories/idea/privacy/">privacy<span>1</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/golang/">golang<span>2</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/frontend/">frontend<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu/">ubuntu<span>7</span></a></li>
+		
+			<li><a href="/tags/algorithm/">algorithm<span>1</span></a></li>
+		
+			<li><a href="/tags/devops/">devops<span>12</span></a></li>
+		
+			<li><a href="/tags/privacy/">privacy<span>2</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>7</span></a></li>
+		
+			<li><a href="/tags/idea/">idea<span>5</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="fa fa-github"></i><a href="http://www.github.com/immortalt" title="My Github account." target="_blank">My Github</a></li>
+	
+	</ul>
+</div>
+
+
+		
+			<div class="widget">
+    
+	    <h4 class="dsq-widget-title">Recent Comments</h4>
+		<div id="recent-comments"></div>
+		<script type="text/javascript">
+		    getRecentCommentsList({
+			   type: "github" ? "github" : "github",
+			   user: "immortal-blog",
+               repo: "immortal-blog.github.io",
+               client_id: "0926fba2ec35893ced81",
+               client_secret: "f4eb7e8722e7eadb82df98401bbd86c4111a107c",
+			   count: "3" ? "3" : 5,
+			   recent_comments_target: "#recent-comments"
+			});
+		</script>
+	
+</div>
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html" ><i class="fa fa-file-o"></i>How to enable mouse side bu...</a>
+      </li>
+    
+      <li>
+        <a href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html" ><i class="fa fa-file-o"></i>Remove News Widgets of Wind...</a>
+      </li>
+    
+      <li>
+        <a href="/privacy/personal-note-editing-software-research.html" ><i class="fa fa-file-o"></i>Personal note editing softw...</a>
+      </li>
+    
+      <li>
+        <a href="/devops/copy_and_paste_content_to_markdown.html" ><i class="fa fa-file-o"></i>Copy and paste content to m...</a>
+      </li>
+    
+      <li>
+        <a href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html" ><i class="fa fa-file-o"></i>How to mount VMware shared ...</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.    
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
