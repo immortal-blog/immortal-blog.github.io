@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>The Ultimate Guide to Disabling VBS on Windows 11 24H2</title>
+      <link href="/devops/disable-vbs-on-windows-11-24h2.html"/>
+      <url>/devops/disable-vbs-on-windows-11-24h2.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>If you’re encountering errors like “This host does not support AMD-V” or “Intel VT-x is unavailable” when using VMware Workstation, VirtualBox, or other virtualization software, you likely need to disable Windows 11’s VBS (Virtualization-Based Security).</p><p><strong>Critical Update</strong>: Starting with Windows 11 24H2, disabling VBS has become more complex. Traditional methods are no longer sufficient - you must also disable the VBS dependency for Windows Hello.</p><hr><h2 id="What-is-VBS-and-Why-Does-It-Interfere-with-Virtual-Machines"><a href="#What-is-VBS-and-Why-Does-It-Interfere-with-Virtual-Machines" class="headerlink" title="What is VBS and Why Does It Interfere with Virtual Machines?"></a>What is VBS and Why Does It Interfere with Virtual Machines?</h2><p>VBS (Virtualization-Based Security) is a Windows 11 security feature that creates an isolated security environment using the Hyper-V virtualization layer. While this sounds beneficial, there’s a problem:</p><ul><li><strong>VBS monopolizes CPU hardware virtualization features</strong> (AMD-V or Intel VT-x)</li><li>Third-party virtualization software like VMware needs direct access to these hardware features</li><li>When VBS is running, VMware cannot gain control of hardware virtualization, causing errors</li></ul><p>In simple terms: <strong>VBS and VMware cannot simultaneously use the same virtualization hardware</strong>.</p><hr><h2 id="The-24H2-Change-Windows-Hello-Now-Requires-VBS"><a href="#The-24H2-Change-Windows-Hello-Now-Requires-VBS" class="headerlink" title="The 24H2 Change: Windows Hello Now Requires VBS"></a>The 24H2 Change: Windows Hello Now Requires VBS</h2><p>Starting with Windows 11 24H2, Microsoft made a significant change: <strong>Windows Hello security mechanisms now depend on VBS</strong>.</p><p>This means that even if you disable VBS using traditional methods, as long as Windows Hello-related functionality remains enabled in the registry, VBS will automatically restart.</p><p>This is why many users found that:</p><ul><li>Turned off Memory Integrity ✅</li><li>Ran <code>bcdedit</code> commands ✅</li><li>Modified registry settings ✅</li><li>After reboot, <strong>VBS still shows “Running”</strong> ❌</li></ul><hr><h2 id="Complete-Disabling-Steps-For-24H2"><a href="#Complete-Disabling-Steps-For-24H2" class="headerlink" title="Complete Disabling Steps (For 24H2)"></a>Complete Disabling Steps (For 24H2)</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul><li>Windows 11 (any edition: Home&#x2F;Pro&#x2F;Enterprise)</li><li>Administrator privileges</li><li>Virtualization enabled in BIOS (AMD-V or Intel VT-x)</li></ul><hr><h3 id="Step-1-Check-Current-VBS-Status"><a href="#Step-1-Check-Current-VBS-Status" class="headerlink" title="Step 1: Check Current VBS Status"></a>Step 1: Check Current VBS Status</h3><ol><li>Press <code>Win + R</code>, type <code>msinfo32</code>, press Enter</li><li>In the System Information window, scroll down</li><li>Find the <strong>“Virtualization-based security”</strong> row<ul><li>If it shows <strong>“Running”</strong> → needs to be disabled</li><li>If it shows <strong>“Not enabled”</strong> → no action needed</li></ul></li></ol><hr><h3 id="Step-2-Disable-Tamper-Protection"><a href="#Step-2-Disable-Tamper-Protection" class="headerlink" title="Step 2: Disable Tamper Protection"></a>Step 2: Disable Tamper Protection</h3><ol><li>Open <strong>Settings</strong> (Win + I)</li><li>Go to <strong>Privacy &amp; security</strong> → <strong>Windows Security</strong></li><li>Click <strong>Virus &amp; threat protection</strong></li><li>Click <strong>Manage settings</strong></li><li>Toggle <strong>Tamper Protection</strong> to <strong>Off</strong></li></ol><hr><h3 id="Step-3-Disable-Memory-Integrity"><a href="#Step-3-Disable-Memory-Integrity" class="headerlink" title="Step 3: Disable Memory Integrity"></a>Step 3: Disable Memory Integrity</h3><ol><li>Open <strong>Settings</strong> (Win + I)</li><li>Go to <strong>Privacy &amp; security</strong> → <strong>Windows Security</strong></li><li>Click <strong>Device security</strong></li><li>Click <strong>Core isolation details</strong></li><li>Toggle <strong>Memory integrity</strong> to <strong>Off</strong></li></ol><hr><h3 id="Step-4-Disable-Hyper-V-Related-Features"><a href="#Step-4-Disable-Hyper-V-Related-Features" class="headerlink" title="Step 4: Disable Hyper-V Related Features"></a>Step 4: Disable Hyper-V Related Features</h3><p>Open Command Prompt as administrator (search for <code>cmd</code>, right-click and select <strong>Run as administrator</strong>), then run these commands sequentially:</p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /<span class="built_in">set</span> hypervisorlaunchtype off</span><br><span class="line">dism /online /Disable-Feature /FeatureName:Microsoft-Hyper-V-All /NoRestart</span><br><span class="line">dism /online /Disable-Feature /FeatureName:HypervisorPlatform /NoRestart</span><br><span class="line">dism /online /Disable-Feature /FeatureName:VirtualMachinePlatform /NoRestart</span><br></pre></td></tr></table></figure><hr><h3 id="Step-5-Modify-Registry-Critical"><a href="#Step-5-Modify-Registry-Critical" class="headerlink" title="Step 5: Modify Registry (Critical!)"></a>Step 5: Modify Registry (Critical!)</h3><p>⚠️ <strong>This is the most crucial step for 24H2</strong></p><h4 id="5-1-Disable-VBS-Main-Switch"><a href="#5-1-Disable-VBS-Main-Switch" class="headerlink" title="5.1 Disable VBS Main Switch"></a>5.1 Disable VBS Main Switch</h4><ol><li>Press <code>Win + R</code>, type <code>regedit</code>, press Enter</li><li>Navigate to:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard</span><br></pre></td></tr></table></figure></li><li>Find or create <strong>EnableVirtualizationBasedSecurity</strong> (DWORD 32-bit value)</li><li>Double-click and set the value to <strong>0</strong></li></ol><h4 id="5-2-Disable-Credential-Guard-if-exists"><a href="#5-2-Disable-Credential-Guard-if-exists" class="headerlink" title="5.2 Disable Credential Guard (if exists)"></a>5.2 Disable Credential Guard (if exists)</h4><p>Continue in the registry and navigate to:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard</span><br></pre></td></tr></table></figure><p>If an <strong>Enabled</strong> key exists, set its value to <strong>0</strong></p><h4 id="5-3-🔥-Disable-Windows-Hello-VBS-Dependency-24H2-Required"><a href="#5-3-🔥-Disable-Windows-Hello-VBS-Dependency-24H2-Required" class="headerlink" title="5.3 🔥 Disable Windows Hello VBS Dependency (24H2 Required!)"></a>5.3 🔥 Disable Windows Hello VBS Dependency (24H2 Required!)</h4><p><strong>This is the critical step that most tutorials miss!</strong></p><p>Navigate to:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\WindowsHello</span><br></pre></td></tr></table></figure><p>Find <strong>Enabled</strong> (DWORD 32-bit value) and set its value to <strong>0</strong></p><p><strong>Important Notes</strong>:</p><ul><li>After disabling this, you can still use Windows Hello normally (including PIN login)</li><li>Windows Hello simply no longer uses VBS as its security backend</li><li>This does not affect your daily usage experience</li></ul><hr><h3 id="Step-6-Restart-Your-Computer"><a href="#Step-6-Restart-Your-Computer" class="headerlink" title="Step 6: Restart Your Computer"></a>Step 6: Restart Your Computer</h3><p>Close Registry Editor and restart your computer.</p><hr><h3 id="Step-7-Verify-Results"><a href="#Step-7-Verify-Results" class="headerlink" title="Step 7: Verify Results"></a>Step 7: Verify Results</h3><p>After reboot:</p><ol><li>Press <code>Win + R</code>, type <code>msinfo32</code>, press Enter</li><li>Check if <strong>“Virtualization-based security”</strong> shows <strong>“Not enabled”</strong></li><li>Open VMware Workstation and try starting a virtual machine</li><li>The “AMD-V&#x2F;VT-x not supported” error should no longer appear</li></ol><hr><h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="Q1-Why-does-VBS-automatically-re-enable-after-reboot"><a href="#Q1-Why-does-VBS-automatically-re-enable-after-reboot" class="headerlink" title="Q1: Why does VBS automatically re-enable after reboot?"></a>Q1: Why does VBS automatically re-enable after reboot?</h3><p><strong>A</strong>: Most likely because you didn’t disable the Windows Hello VBS dependency. This is a hidden mechanism added in 24H2 that must be manually disabled in the registry:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\WindowsHello\Enabled = 0</span><br></pre></td></tr></table></figure><h3 id="Q2-Can-I-still-use-Windows-Hello-and-PIN-login-after-disabling"><a href="#Q2-Can-I-still-use-Windows-Hello-and-PIN-login-after-disabling" class="headerlink" title="Q2: Can I still use Windows Hello and PIN login after disabling?"></a>Q2: Can I still use Windows Hello and PIN login after disabling?</h3><p><strong>A</strong>: Yes! Disabling the Windows Hello VBS dependency doesn’t affect Windows Hello functionality itself - it just prevents it from using VBS as a security layer.</p><h3 id="Q3-Do-I-need-to-disable-virtualization-in-BIOS"><a href="#Q3-Do-I-need-to-disable-virtualization-in-BIOS" class="headerlink" title="Q3: Do I need to disable virtualization in BIOS?"></a>Q3: Do I need to disable virtualization in BIOS?</h3><p><strong>A</strong>: <strong>No! Absolutely not!</strong> Disabling virtualization in BIOS will make VMware completely unable to run. The correct approach is:</p><ul><li>✅ <strong>Enable</strong> virtualization in BIOS (AMD-V or Intel VT-x)</li><li>❌ <strong>Disable</strong> VBS and Hyper-V in Windows</li></ul><h3 id="Q4-What-are-the-security-risks-of-disabling-VBS"><a href="#Q4-What-are-the-security-risks-of-disabling-VBS" class="headerlink" title="Q4: What are the security risks of disabling VBS?"></a>Q4: What are the security risks of disabling VBS?</h3><p><strong>A</strong>: VBS provides an additional security protection layer. After disabling:</p><ul><li>Some advanced security features will be disabled (like Credential Guard)</li><li>Malware protection capabilities will be slightly reduced</li><li>But for ordinary users with good security habits, the impact is minimal</li></ul><p>If your computer is primarily used for development, virtualization testing, etc., the performance gains from disabling VBS usually outweigh the security loss.</p><h3 id="Q5-What-about-games-like-VALORANT-that-require-VBS"><a href="#Q5-What-about-games-like-VALORANT-that-require-VBS" class="headerlink" title="Q5: What about games (like VALORANT) that require VBS?"></a>Q5: What about games (like VALORANT) that require VBS?</h3><p><strong>A</strong>: Some games’ anti-cheat systems (like Riot Vanguard) do rely on VBS. You need to choose between:</p><ul><li>Enable VBS → Can play these games, but VMware won’t work</li><li>Disable VBS → VMware works, but these games won’t run</li></ul><p>There’s no perfect solution unless you use dual-boot.</p><h3 id="Q6-I-have-Windows-11-Home-which-doesn’t-have-Group-Policy-Editor-What-should-I-do"><a href="#Q6-I-have-Windows-11-Home-which-doesn’t-have-Group-Policy-Editor-What-should-I-do" class="headerlink" title="Q6: I have Windows 11 Home, which doesn’t have Group Policy Editor. What should I do?"></a>Q6: I have Windows 11 Home, which doesn’t have Group Policy Editor. What should I do?</h3><p><strong>A</strong>: No problem. This tutorial’s methods are entirely based on command line and registry - no Group Policy Editor needed. Home edition works fine.</p><hr><h2 id="Registry-Modification-Summary-Quick-Reference"><a href="#Registry-Modification-Summary-Quick-Reference" class="headerlink" title="Registry Modification Summary (Quick Reference)"></a>Registry Modification Summary (Quick Reference)</h2><p>If you want to directly see the registry locations that need modification, here’s the complete list:</p><table><thead><tr><th>Registry Path</th><th>Key Name</th><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard</code></td><td><code>EnableVirtualizationBasedSecurity</code></td><td><code>0</code></td><td>Disable VBS main switch</td></tr><tr><td><code>HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\CredentialGuard</code></td><td><code>Enabled</code></td><td><code>0</code></td><td>Disable Credential Guard</td></tr><tr><td><code>HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\WindowsHello</code></td><td><code>Enabled</code></td><td><code>0</code></td><td><strong>Disable Windows Hello VBS dependency (24H2 critical)</strong></td></tr></tbody></table><p>All value types are <strong>DWORD (32-bit) Value</strong>.</p><hr><h2 id="Understanding-the-24H2-Documentation-Gap"><a href="#Understanding-the-24H2-Documentation-Gap" class="headerlink" title="Understanding the 24H2 Documentation Gap"></a>Understanding the 24H2 Documentation Gap</h2><p>The Windows Hello VBS dependency introduced in 24H2 represents a significant architectural change. This specific registry setting (<code>DeviceGuard\Scenarios\WindowsHello</code>) is not prominently mentioned in the mainstream documentation, which has led to confusion among users following traditional VBS disabling methods.</p><p>Community forums and discussions (such as on Reddit and Microsoft Q&amp;A) have been instrumental in identifying this requirement. This tutorial consolidates those findings to provide a complete solution.</p><hr><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The VBS disabling process in Windows 11 24H2 is more complex than before, but with the correct steps, it can be completely disabled.</p><p><strong>Key Points Summary</strong>:</p><ol><li>BIOS virtualization must <strong>remain enabled</strong> ✅</li><li>Windows VBS must be <strong>completely disabled</strong> ❌</li><li><strong>Must disable Windows Hello VBS dependency</strong> (new in 24H2) ❌</li><li>Verify results after reboot</li></ol><p>If you have any questions, feel free to discuss in the comments. Happy virtualizing!</p><hr><p><strong>References</strong>:</p><ul><li><a href="https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/configure">Microsoft Learn - Configure Credential Guard</a></li><li><a href="https://www.reddit.com/r/Amd/comments/1fums7b/comment/lycwbc2">Reddit Discussion - VBS Not Disabled on Windows 11 24H2</a></li><li><a href="https://learn.microsoft.com/en-sg/answers/questions/2113711/vbs-is-not-disabled-on-windows-11-version-24h2-os">Microsoft Q&amp;A - VBS Is Not Disabled on Windows 11 Version 24H2</a></li><li><a href="https://www.tomshardware.com/how-to/disable-vbs-windows-11">Tom’s Hardware - How to Disable VBS and Speed Up Windows 11</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> windows </tag>
+            
+            <tag> virtualization </tag>
+            
+            <tag> vmware </tag>
+            
+            <tag> security </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to enable mouse side buttons on a Vmware VM</title>
+      <link href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html"/>
+      <url>/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html</url>
+      
+        <content type="html"><![CDATA[<p>Close the VM.<br>Edit the .vmx file and add this config:  </p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mouse.vusb.enable = &quot;TRUE&quot;</span><br><span class="line">mouse.vusb.useBasicMouse = &quot;FALSE&quot;</span><br><span class="line">usb.generic.allowHID = &quot;TRUE&quot;</span><br></pre></td></tr></table></figure><p>Save the .vmx file.<br>Start the VM and you can see that you can use the mouse side buttons to move forward and backward on the web page.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Remove News Widgets of Windows 11 to Improve Performance</title>
+      <link href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html"/>
+      <url>/devops/remove-news-widgets-of-windows-11-to-improve-performance.html</url>
+      
+        <content type="html"><![CDATA[<p>Widgets are a new feature introduced by Microsoft in Windows 11.<br>Currently, the news and interest modules that are enabled by default in widgets provide various kinds of information.</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget uninstall MicrosoftWindows.Client.WebExperience_cw5n1h2txyewy</span><br></pre></td></tr></table></figure><p>For each new Windows 11 computer, I strongly recommend this command to improve the performance a lot.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Personal note editing software research</title>
+      <link href="/privacy/personal-note-editing-software-research.html"/>
+      <url>/privacy/personal-note-editing-software-research.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Personal-note-editing-needs"><a href="#Personal-note-editing-needs" class="headerlink" title="Personal note editing needs"></a>Personal note editing needs</h2><h3 id="Core-requirements"><a href="#Core-requirements" class="headerlink" title="Core requirements:"></a>Core requirements:</h3><ul><li>Edit and save content in markdown format, which makes the format simple, easy to use, open, and easy to migrate</li><li>Support WYSIWYG mode when editing, similar to Typora</li><li>Open source, thus keeping content safe and free</li><li>Support offline use, data can be stored locally, or stored in third-party channels such as Google Drive, Github repository</li><li>Support direct copying of pictures and text on web pages and paste them directly</li><li>Open the folder and display the file directory structure, which is convenient for placing and organizing notes according to the file directory from the sidebar</li><li>Supports the creation of internal links between markdown files, which can be easily jumped</li><li>Supports relationship graphs showing internal links in documents</li></ul><h3 id="Optional-Requirements"><a href="#Optional-Requirements" class="headerlink" title="Optional Requirements"></a>Optional Requirements</h3><ul><li>Supports loading plugins to extend functionality</li><li>Open the online version editor directly from the web browser, call the file API to open the local folder for editing, therefore even chromebook can use it</li></ul><h2 id="Software-solutions"><a href="#Software-solutions" class="headerlink" title="Software solutions"></a>Software solutions</h2><ul><li>✅<strong>Logseq</strong> : Not perfect, but currently the most recommended</li><li>Advantages:<ul><li>Open source, most functions are as easy to use as Obsidian, such as beautiful appearance, local data storage, support for bidirectional links and relationship graphs</li><li>There is a web version, you can directly open the local folder</li></ul></li><li>Shortcomings:<ul><li>The directory structure browsing is not supported, and all the notes are mixed together and it is not easy to classify. Solution: If you find a way to write a “navigation document”, similar to the Yellow Pages, and then bookmark it, and add a link to the Yellow Pages every time you add a sub-document, it may also be a convenient way to find files by category. This is still not convenient like a directory, but it can be adapted.</li><li>Does not support the rendering the md standard checkbox.</li></ul></li><li>❗<strong>Notion</strong>: It is basically free and easy to use, but there is no offline version, you cannot save data locally and synchronize data in your own way, which brings hidden dangers in data security and privacy, so you cannot use it with confidence. However, it supports the use of online real-time collaboration scenarios and can be used on projects, but is not suitable for storing personal core data.</li><li>❗<strong>Obsidian</strong>: It is completely free, easy to use, and supports all requirements except open source, but it is not open source. There is currently no better option for personal use.</li><li>❗<strong>VSCode+Office Viewer plugin</strong> (based on vditor): open source, md editing function is very powerful, and there is a toolbar. But bidirectional links and relational graphs are not supported. It can be said to be a good md editor, but not a very good note editor. And this plugin does not support running in the VSCode web.</li></ul><span id="more"></span><ul><li>❌<strong>marktext</strong>: Open source, easy to develop based on electron, the implementation of editing functions is close to the requirements, you can consider implementing Obsidian functions by yourself: internal links and jumps in notes, relationship graphs, and improve its interface. However, in practice, it was found that there are some serious bugs in its editing components, such as strange bugs when pasting pictures.</li><li>❌<strong>Typora</strong>: The editing function is easy to use, but it is not open source and charges.</li><li>❌StackEdit: Open source, supports directory browsing, but maintenance has been stopped for a long time, and many functions such as Github synchronization cannot be used.</li><li>❌<strong>Joplin</strong>: Open source, but the interface is old, the markdown display is backward (for example, the checkbox is not supported), and it does not support internal links and jumps in the document.</li><li>❌<strong>AthensResearch</strong>: Supports relational graphs, but does not support markdown, and data seems not easy to export.</li><li>❌<strong>VSCode</strong>: Open source, but does not support direct pasting of web page content, and the function of pasting pictures is not well supported</li><li>❌<strong>VSCode+Foam plugin</strong>: Supports internal links (only in VSCode’s default markdown text editor mode, cannot combine with Office Viewer plugin) and relational graphs (the styles are not good), but the inability to paste web content and pictures directly is the biggest problem.</li><li>❌<strong>Ghostwriter</strong>: Open source, but only supports opening a single file, does not support opening a directory</li><li>❌<strong>Haroopad</strong>: Open source, but only supports opening a single file, does not support opening a directory</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> privacy </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+            <tag> privacy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Copy and paste content to markdown</title>
+      <link href="/devops/copy_and_paste_content_to_markdown.html"/>
+      <url>/devops/copy_and_paste_content_to_markdown.html</url>
+      
+        <content type="html"><![CDATA[<p>Today I wanted to practice on LeetCode, and then I opened <a href="https://github.com/phodal/2md">https://github.com/phodal/2md</a> to save the problem to local.<br>Because I found that there were some small problems with this tool, I forked a copy and fixed some errors that it would generate when converting the content of the LeetCode problem.<br>In this way, copy the problem of LeetCode and paste it into my 2md, and then copy the converted markdown to save it locally.<br>Repo: <a href="https://github.com/immortalt/2md">https://github.com/immortalt/2md</a><br>The displayed format is correct, and the effect is much better.<br>The online address of my 2md: <a href="https://immortal-blog.github.io/tomd/">https://immortal-blog.github.io/tomd/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to mount VMware shared folder to ubuntu on boot</title>
+      <link href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html"/>
+      <url>/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html</url>
+      
+        <content type="html"><![CDATA[<p>Sometimes the shared folder function of VMware Workstation may suddenly not work after rebooting.<br>There are several ways to fix it.</p><h2 id="mount-by-a-command"><a href="#mount-by-a-command" class="headerlink" title="mount by a command"></a>mount by a command</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs,allow_other -o nonempty</span><br></pre></td></tr></table></figure><p>This command means to mount all host shared folders to <code>/mnt/hgfs</code>, which is the default operation that VMware should have done automatically.<br>However, the folder would disappear after rebooting.</p><h2 id="mount-automatically"><a href="#mount-automatically" class="headerlink" title="mount automatically"></a>mount automatically</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/fstab</span><br></pre></td></tr></table></figure><p>We can edit the <code>fstab</code> file to write the auto-mount configuration. Just add one line:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.host:/ /mnt/hgfs fuse.vmhgfs-fuse allow_other,defaults 0 0</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Practical advice for python3 algorithm practice</title>
+      <link href="/idea/practical-advice-for-python3-algorithm-practice.html"/>
+      <url>/idea/practical-advice-for-python3-algorithm-practice.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="When-dividing-be-careful-with-large-numbers"><a href="#When-dividing-be-careful-with-large-numbers" class="headerlink" title="When dividing, be careful with large numbers"></a>When dividing, be careful with large numbers</h2><p>Sample: they should be different, but due to the float format, they become the same.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = (<span class="number">1</span> - <span class="number">500000000</span>) / (<span class="number">1</span> - <span class="number">499999999</span>)</span><br><span class="line">b = (<span class="number">500000000</span> - <span class="number">1000000000</span>) / (<span class="number">499999999</span> - <span class="number">999999998</span>)</span><br><span class="line"><span class="built_in">print</span>(a, b, a == b)</span><br><span class="line"><span class="comment"># 1.000000002 1.000000002 True</span></span><br></pre></td></tr></table></figure><p>In this situation, we can just simply use Decimal.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> decimal <span class="keyword">import</span> Decimal</span><br><span class="line">a = Decimal(<span class="number">1</span> - <span class="number">500000000</span>) / Decimal(<span class="number">1</span> - <span class="number">499999999</span>)</span><br><span class="line">b = Decimal(<span class="number">500000000</span> - <span class="number">1000000000</span>) / Decimal(<span class="number">499999999</span> - <span class="number">999999998</span>)</span><br><span class="line"><span class="built_in">print</span>(a, b, a == b)</span><br><span class="line"><span class="comment"># 1.000000002000000008000000032 1.000000002000000004000000008 False</span></span><br></pre></td></tr></table></figure><span id="more"></span><h2 id="How-to-create-a-matrix"><a href="#How-to-create-a-matrix" class="headerlink" title="How to create a matrix"></a>How to create a matrix</h2><h3 id="Wrong-method"><a href="#Wrong-method" class="headerlink" title="Wrong method"></a>Wrong method</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Wrong method (shallow copy)</span></span><br><span class="line">list_two = [[<span class="number">0</span>] * <span class="number">3</span>] * <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(list_two)</span><br><span class="line"><span class="comment"># [[0, 0, 0], [0, 0, 0], [0, 0, 0]]</span></span><br><span class="line">list_two[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(list_two)</span><br><span class="line"><span class="comment"># [[0, 2, 0], [0, 2, 0], [0, 2, 0]]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="Correct-Method"><a href="#Correct-Method" class="headerlink" title="Correct Method"></a>Correct Method</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Correct method (deep copy)</span></span><br><span class="line">list_three = [[<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)] <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>)]</span><br><span class="line"><span class="built_in">print</span>(list_three)</span><br><span class="line"><span class="comment"># [[0, 0, 0], [0, 0, 0], [0, 0, 0]]</span></span><br><span class="line">list_three[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(list_three)</span><br><span class="line"><span class="comment"># [[0, 0, 0], [0, 3, 0], [0, 0, 0]]</span></span><br></pre></td></tr></table></figure><h2 id="Useful-tool-classes-in-python3"><a href="#Useful-tool-classes-in-python3" class="headerlink" title="Useful tool classes in python3"></a>Useful tool classes in python3</h2><h3 id="defaultdict"><a href="#defaultdict" class="headerlink" title="defaultdict"></a>defaultdict</h3><p>A dict that has default value.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line">a = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">b = defaultdict(<span class="keyword">lambda</span>: [])</span><br><span class="line">c = defaultdict(<span class="keyword">lambda</span>: <span class="number">0</span>)</span><br><span class="line"><span class="comment"># b[0]: []</span></span><br><span class="line"><span class="comment"># c[0]: 0</span></span><br><span class="line"><span class="comment"># c[1] += 1  =&gt;  c[1] == 1</span></span><br></pre></td></tr></table></figure><h3 id="Counter"><a href="#Counter" class="headerlink" title="Counter"></a>Counter</h3><p>A dict to auto-count items.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>]</span><br><span class="line">b = Counter(a)</span><br><span class="line"><span class="comment"># b: Counter(&#123;3: 2, 1: 1, 2: 1&#125;)</span></span><br></pre></td></tr></table></figure><h2 id="More-efficient-way-to-code"><a href="#More-efficient-way-to-code" class="headerlink" title="More efficient way to code"></a>More efficient way to code</h2><h3 id="for-loop-with-value-and-index"><a href="#for-loop-with-value-and-index" class="headerlink" title="for loop with value and index"></a>for loop with value and index</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first way</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(items)):</span><br><span class="line">    pair = (i, items[i])</span><br><span class="line"><span class="comment"># second way: more efficient</span></span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">enumerate</span>(items):</span><br><span class="line">    pair = (i, v)</span><br></pre></td></tr></table></figure><h3 id="don’t-use-len-in-for-loop"><a href="#don’t-use-len-in-for-loop" class="headerlink" title="don’t use len() in for loop"></a>don’t use len() in for loop</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># first way</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(items)):</span><br><span class="line">    <span class="built_in">print</span>(items[i])</span><br><span class="line"><span class="comment"># second way: more efficient</span></span><br><span class="line">n = <span class="built_in">len</span>(items)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    <span class="built_in">print</span>(items[i])</span><br></pre></td></tr></table></figure><h2 id="cache-function-value"><a href="#cache-function-value" class="headerlink" title="cache function value"></a>cache function value</h2><p>@functools.cache(user_function)<br>Simple lightweight unbounded function cache. Sometimes called “memoize”.<br>Returns the same as lru_cache(maxsize&#x3D;None), creating a thin wrapper around a dictionary lookup for the function arguments. Because it never needs to evict old values, this is smaller and faster than lru_cache() with a size limit.<br>For example:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> cache</span><br><span class="line"></span><br><span class="line"><span class="meta">@cache</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">factorial</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> n * factorial(n-<span class="number">1</span>) <span class="keyword">if</span> n <span class="keyword">else</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+            <tag> algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to run VMware 16.2.3 on Ubuntu 22.04</title>
+      <link href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html"/>
+      <url>/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html</url>
+      
+        <content type="html"><![CDATA[<p>Currently (2022-05-16), we cannot install and run VMware Workstation 16.2.3 on Ubuntu Desktop 22.04 LTS.<br>You can installed it and see the icon, but when you try to open it, it would ask you to install some modules and would fail.</p><h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Here is a script that are verified by me that can solve the problem.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/mkubecek/vmware-host-modules</span><br><span class="line"><span class="built_in">cd</span> vmware-host-modules</span><br><span class="line">git checkout workstation-16.2.3</span><br><span class="line">sudo make ; sudo make install</span><br><span class="line">sudo modprobe -a vmw_vmci vmmon vmnet</span><br></pre></td></tr></table></figure><p>Then you may need to reboot the host system to make VM networks working.</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Although Ubuntu 22.04 is a LTS version, it is not stable and compatible enough to deal with daily works currently. My advice is to use Ubuntu 20.04.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to enable font ligatures in VSCode</title>
+      <link href="/devops/how-to-enable-font-ligatures-in-vscode.html"/>
+      <url>/devops/how-to-enable-font-ligatures-in-vscode.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="What-are-font-ligatures？"><a href="#What-are-font-ligatures？" class="headerlink" title="What are font ligatures？"></a>What are font ligatures？</h2><p><img src="https://user-images.githubusercontent.com/76415903/167493317-ee5c86e9-297f-4ebe-a9c4-8580216401ce.png" alt="image"><br>It’s an interesting feature in fonts like JetBrains Mono.</p><h2 id="I-have-enabled-JetBrains-Mono-but-why-not-see-font-ligatures？"><a href="#I-have-enabled-JetBrains-Mono-but-why-not-see-font-ligatures？" class="headerlink" title="I have enabled JetBrains Mono, but why not see font ligatures？"></a>I have enabled JetBrains Mono, but why not see font ligatures？</h2><p>I think VSCode or Word disables this feature by default, and we need to change font options to enable this feature.</p><h2 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h2><p>Open “Menu”-“Setting”, open “setting.json”, and change this option:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;editor.fontLigatures&quot;: true</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to chat safely online</title>
+      <link href="/privacy/how-to-chat-safely-online.html"/>
+      <url>/privacy/how-to-chat-safely-online.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Symmetric-encryption-communication"><a href="#Symmetric-encryption-communication" class="headerlink" title="Symmetric encryption communication"></a>Symmetric encryption communication</h2><p>The most straightforward way is that you can decide on an encryption key in reality and use symmetric encryption such as AES-256 to encrypt and decrypt all messages.<br>But it’s not convenient to exchange the key online. Because if you send the key using an unsafe channel that is being monitored, the attacker can also get the key and decrypt all your messages. The attacker can directly use <strong>passive attack</strong> (read-only, without any modification) to monitor the messages.<br>One way is to use asymmetric encryption communication.</p><h2 id="Asymmetric-encryption-communication"><a href="#Asymmetric-encryption-communication" class="headerlink" title="Asymmetric encryption communication"></a>Asymmetric encryption communication</h2><p>The mechanism of asymmetric encryption can be that A and B each generate a set of public keys and private keys and then use the other one’s public key to encrypt the content and send it, and the other one can decrypt it with its private key after receiving it.<br>Therefore, even if the attacker gets A and B’s public keys, he cannot decrypt the messages because he needs to know the private key.<br>But it’s still not perfect.</p><h3 id="MITM-attack-in-asymmetric-encryption-communication"><a href="#MITM-attack-in-asymmetric-encryption-communication" class="headerlink" title="MITM attack in asymmetric encryption communication"></a>MITM attack in asymmetric encryption communication</h3><p>MITM means man-in-the-middle attack. Suppose you generate a public key and a private key for two clients, A and B, and then exchange the public keys of the two through a server C, and the server C is not secure. It is useless to monitor the public keys because only obtaining the public key cannot decrypt messages with the private key, so it cannot be monitored. But suppose B’s public key is replaced by C, and A uses this replaced public key C to encrypt messages. In that case, server C decrypts it with C’s private key, encrypts it with B’s public key, and B decrypts it with its private key. A and B have no sense, and C succeeds in a man-in-the-middle attack. Even if a secure key exchange technology such as the D-H key exchange method is used, the key exchange process can still be relayed by server C as a middleman.<br>The attacker cannot directly use <strong>passive attack</strong> to monitor the messages in asymmetric encryption communication. The attacker needs to manipulate and change the communication flow.</p><span id="more"></span><h2 id="Prevent-from-MITM-attack"><a href="#Prevent-from-MITM-attack" class="headerlink" title="Prevent from MITM attack"></a>Prevent from MITM attack</h2><p>Therefore, to avoid man-in-the-middle attacks, <strong>certificate authentication</strong> must be used, or keys must be exchanged <strong>in another channel</strong> that the middleman cannot participate in, such as in reality.</p><h3 id="Certificate-authentication"><a href="#Certificate-authentication" class="headerlink" title="Certificate authentication"></a>Certificate authentication</h3><p>Certificate authentication is similar to that each operating system comes with its own CA root certificates. The CA signs and issues an SSL certificate to a certified website, and the operating system can verify whether the website’s certificate is signed by a built-in CA root certificate. This is based on the belief that the CA is trustworthy and not being manipulated. However, we should not trust any organization.</p><h2 id="PGP-communication"><a href="#PGP-communication" class="headerlink" title="PGP communication"></a>PGP communication</h2><p>PGP (or GPG) is one kind of asymmetric encryption communication that uses public and private keys to encrypt and decrypt and mainly uses emails to send messages.</p><h3 id="MITM-in-PGP-online-key-exchange"><a href="#MITM-in-PGP-online-key-exchange" class="headerlink" title="MITM in PGP online key exchange"></a>MITM in PGP online key exchange</h3><p>PGP (or GPG) online key exchange is generally based on email registration, uploading the public key to the keyserver, searching for the other one’s public key according to the email, and then using email communication. This is based on the belief that the keyserver is not being manipulated. But it has an advantage that the keyserver and the communication channel (email) are independent. If a MITM attack is possible, the website of the keyserver and the user’s email must be controlled at the same time. Otherwise, even if the public key is replaced (A uses C’s public key to encrypt and send an email to B) if C can’t manipulate A and B’s mail server’s data (let A’s email be sent to C, and C decrypts with its own private key and encrypt with B’s public key and send to B pretends that A is sent to B), they can’t be attacked by MITM. If A and B’s PGP keyservers and mail manufacturers are completely controlled by the same company, it is possible for this company to completely replace keys and relay mail messages. So the key is that <strong>the keyserver company and the mail company cannot be controlled by the same country</strong>.</p><h2 id="A-simple-method-to-exchange-public-keys"><a href="#A-simple-method-to-exchange-public-keys" class="headerlink" title="A simple method to exchange public keys"></a>A simple method to exchange public keys</h2><p>Actually, you don’t even need a keyserver. Suppose, after exchanging the public key directly through WhatsApp or WeChat (assuming these two channels are monitored), then immediately start a video call, and look at each other’s screen to see if the public key of the other one is the same as the public key on your own computer screen. You can also talk about some randomly selected daily questions at the same time (to increase the difficulty of making fake AI-generated videos). It’s basically foolproof. The public key is originally public, and it doesn’t matter if it is monitored. The main point is how to prove that the other one’s public key has not been replaced by an intermediary. Video calls are all about assuming they can’t replace the video stream in real-time, and then they can’t fake the public key.</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h3 id="Security-is-based-on-assumptions"><a href="#Security-is-based-on-assumptions" class="headerlink" title="Security is based on assumptions"></a>Security is based on assumptions</h3><p>The best way to avoid man-in-the-middle attacks is to make an assumption that “the middleman can’t do something,” and based on this assumption, do something that a middleman can’t intervene. For example, it is assumed that the middleman cannot monitor the exchange of keys between two people in a safe place in reality. For another example, it is assumed that the middleman cannot replace the video with a fake video that contains a fake public key on your friend’s screen in real-time and use an AI-generated voice to answer your random question in real-time perfectly when the two people have a video call to verify the public key.<br>To be completely decentralized, without trusting any server, you can only exchange in reality, like joining a key signing party.</p><h3 id="Use-a-safe-device"><a href="#Use-a-safe-device" class="headerlink" title="Use a safe device"></a>Use a safe device</h3><p>In the end, <strong>do not forget to use a safe device</strong>.<br>For example, if you</p><ul><li>buy a hardware with a BIOS backdoor (even if you reinstall the system, it will automatically install the backdoor for you)</li><li>use a closed-source network-updated commercial operating system (the company may compromise and then control your computer over the network)</li><li>use commercial software that is not open source (the software may connect to the Internet and then push a Trojan to your computer, or it may contain a Trojan function)</li><li>use an open-source software but contains evil codes</li></ul><p>you cannot protect your private key, or your keyboard input could be completely monitored, or your screen could be captured. Then all your previous efforts were in vain. It is not enough if you use a secure device. Even if there is one unsecured device in your area, it can steal sound and light from the environment through microphones and cameras, make side channel attacks, guesses what you typed and restore what you said.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> privacy </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+            <tag> privacy </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>How to detect and solve port occupancy in linux</title>
+      <link href="/devops/how-to-detect-and-solve-port-occupancy-in-linux.html"/>
+      <url>/devops/how-to-detect-and-solve-port-occupancy-in-linux.html</url>
+      
+        <content type="html"><![CDATA[<p>Sometimes we may find that a program is occupying a port, and we cannot use this port.<br>We can use two commands to solve this problem.</p><h3 id="Find-the-program"><a href="#Find-the-program" class="headerlink" title="Find the program"></a>Find the program</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -anp | grep 4000</span><br><span class="line">tcp6       0      0 :::4000                 :::*                    LISTEN      81970/hexo</span><br></pre></td></tr></table></figure><p>Here we can find the pid 81970 before the program name.</p><h3 id="Kill-the-program"><a href="#Kill-the-program" class="headerlink" title="Kill the program"></a>Kill the program</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 81970</span><br></pre></td></tr></table></figure><p>If the permissions are not enough, add sudo before the command.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Send email with postfix on Ubuntu</title>
+      <link href="/devops/send-email-with-postfix-on-ubuntu.html"/>
+      <url>/devops/send-email-with-postfix-on-ubuntu.html</url>
+      
+        <content type="html"><![CDATA[<p>My method referenced many tutorials, fixed the errors and worked successfully.</p><h2 id="Install-mailutils"><a href="#Install-mailutils" class="headerlink" title="Install mailutils"></a>Install mailutils</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install mailutils</span><br></pre></td></tr></table></figure><h2 id="Configure-username-and-password"><a href="#Configure-username-and-password" class="headerlink" title="Configure username and password"></a>Configure username and password</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/postfix/sasl_passwd</span><br></pre></td></tr></table></figure><p>Input SMTP server, account and password.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[smtp.126.com]:465 username@126.com:password</span><br></pre></td></tr></table></figure><p>The password of the 126 mailbox needs to generate an authorization code in the settings.<br>Then run postmap.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo postmap /etc/postfix/sasl_passwd</span><br></pre></td></tr></table></figure><span id="more"></span><h2 id="Map-sender"><a href="#Map-sender" class="headerlink" title="Map sender"></a>Map sender</h2><p>By default, postfix uses your username@hostname (the one you can see in the title bar of the Ubuntu Console window) to send emails. Such emails will be rejected by the smtp server (553 Mail from must equal authorized user), so you need to put it mapped to your real email address.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/postfix/generic</span><br></pre></td></tr></table></figure><p>Write mapping.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu     username@126.com</span><br></pre></td></tr></table></figure><p>Then run postmap.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo postmap /etc/postfix/generic</span><br></pre></td></tr></table></figure><h2 id="Modify-the-configuration-file"><a href="#Modify-the-configuration-file" class="headerlink" title="Modify the configuration file"></a>Modify the configuration file</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/postfix/main.cf</span><br></pre></td></tr></table></figure><p>edit <code>relayhost</code>.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">relayhost = [smtp.126.com]:465</span><br></pre></td></tr></table></figure><p>Add the following configuration at the end of the file.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># enable SASL authentication</span><br><span class="line">smtp_sasl_auth_enable = yes</span><br><span class="line"></span><br><span class="line"># disallow methods that allow anonymous authentication.</span><br><span class="line">smtp_sasl_security_options = noanonymous</span><br><span class="line"></span><br><span class="line"># where to find sasl_passwd</span><br><span class="line">smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd</span><br><span class="line"></span><br><span class="line"># where to find generic</span><br><span class="line">smtp_generic_maps = hash:/etc/postfix/generic</span><br><span class="line"></span><br><span class="line"># Enable STARTTLS encryption</span><br><span class="line">smtp_use_tls = yes</span><br><span class="line"></span><br><span class="line"># where to find CA certificates</span><br><span class="line">smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt</span><br><span class="line"></span><br><span class="line"># Enable tls encryption</span><br><span class="line">smtp_tls_wrappermode = yes</span><br><span class="line">smtp_tls_security_level = encrypt</span><br></pre></td></tr></table></figure><h2 id="Send-email"><a href="#Send-email" class="headerlink" title="Send email"></a>Send email</h2><p>Then restart postfix and you can send emails.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service postfix restart</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;test&quot;</span> | mail -s <span class="string">&quot;hello&quot;</span> target@126.com</span><br></pre></td></tr></table></figure><h2 id="View-running-log"><a href="#View-running-log" class="headerlink" title="View running log"></a>View running log</h2><p>If there is no response after running, see if there is any error in the log, so as to search and solve the problem in a targeted manner. You can open a separate terminal and place it next to it to view the log in real time.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">tail</span> -f /var/log/mail.log</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Create socks server on Ubuntu 20.04</title>
+      <link href="/devops/create-socks-server-on-ubuntu20.04.html"/>
+      <url>/devops/create-socks-server-on-ubuntu20.04.html</url>
+      
+        <content type="html"><![CDATA[<p>In daily life, we may need to create a socks server to provide network for other hosts.<br>I summarized the method of creating socks service through dante-server under Ubuntu 20.04.</p><h3 id="install-dante-server"><a href="#install-dante-server" class="headerlink" title="install dante-server"></a>install dante-server</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dante-server</span><br></pre></td></tr></table></figure><h3 id="add-user-for-dante-server"><a href="#add-user-for-dante-server" class="headerlink" title="add user for dante-server"></a>add user for dante-server</h3><p>Use this method to create a user to prevent it from logging in.</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -s /sbin/nologin dante-socks</span><br></pre></td></tr></table></figure><h3 id="Edit-the-configuration-file"><a href="#Edit-the-configuration-file" class="headerlink" title="Edit the configuration file"></a>Edit the configuration file</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/danted.conf</span><br></pre></td></tr></table></figure><p>minimal configuration for dante-server</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">logoutput: syslog stdout</span><br><span class="line">internal: ztuku335yr port = 1080</span><br><span class="line">external: ens3</span><br><span class="line">user.notprivileged: dante-socks</span><br><span class="line">clientmethod: none</span><br><span class="line">socksmethod: none</span><br><span class="line">#allow connections from local network</span><br><span class="line">client pass &#123;</span><br><span class="line">        from: 10.0.0.229/24 to: 0.0.0.0/0</span><br><span class="line">        log: error # connect disconnect</span><br><span class="line">&#125;</span><br><span class="line">socks pass &#123;</span><br><span class="line">        from: 0.0.0.0/0 to: 0.0.0.0/0</span><br><span class="line">        command: bind connect udpassociate</span><br><span class="line">        log: error # connect disconnect iooperation</span><br><span class="line">&#125;</span><br><span class="line">socks pass &#123;</span><br><span class="line">        from: 0.0.0.0/0 to: 0.0.0.0/0</span><br><span class="line">        command: bindreply udpreply</span><br><span class="line">        log: error # connect disconnect iooperation</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Monitor the temperature and health status of nvme ssd in Ubuntu</title>
+      <link href="/devops/monitor-nvme-ssd-status.html"/>
+      <url>/devops/monitor-nvme-ssd-status.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="Install-nvme-cli"><a href="#Install-nvme-cli" class="headerlink" title="Install nvme-cli"></a>Install nvme-cli</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nvme-cli</span><br></pre></td></tr></table></figure><h3 id="List-disks"><a href="#List-disks" class="headerlink" title="List disks"></a>List disks</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nvme list</span><br></pre></td></tr></table></figure><h3 id="View-the-details-of-the-hard-drive"><a href="#View-the-details-of-the-hard-drive" class="headerlink" title="View the details of the hard drive"></a>View the details of the hard drive</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nvme smart-log /dev/nvme0</span><br></pre></td></tr></table></figure><h3 id="Auto-refresh-status"><a href="#Auto-refresh-status" class="headerlink" title="Auto refresh status"></a>Auto refresh status</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo watch -n 1 nvme smart-log /dev/nvme0</span><br></pre></td></tr></table></figure><h3 id="Only-view-the-temperature-info"><a href="#Only-view-the-temperature-info" class="headerlink" title="Only view the temperature info"></a>Only view the temperature info</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nvme smart-log /dev/nvme0 | grep &quot;^temperature&quot;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Create a private Ubuntu mirror</title>
+      <link href="/devops/create-a-private-ubuntu-mirror.html"/>
+      <url>/devops/create-a-private-ubuntu-mirror.html</url>
+      
+        <content type="html"><![CDATA[<p>To create a private Ubuntu image, the commonly used tools are debmirror and apt-mirror.<br>As of today (2021-05-17), these two tools have their own advantages and disadvantages.</p><h2 id="debmirror"><a href="#debmirror" class="headerlink" title="debmirror"></a>debmirror</h2><p><a href="https://help.ubuntu.com/community/Debmirror">debmirror document</a><br>debmirror has many downloading methods, and it will compare the local file with the file on the server before downloading so that only the missing files are downloaded. However, it does not seem to support multi-threaded downloading. Debmirror is downloaded one by one, so the download speed is relatively slow.</p><h2 id="apt-mirror"><a href="#apt-mirror" class="headerlink" title="apt-mirror"></a>apt-mirror</h2><p><a href="https://apt-mirror.github.io/">apt-mirror document</a><br>apt-mirror supports 20 threads to download at the same time by default. If you choose a suitable mirror station, the download speed can reach the maximum of my network. However, it does not seem to make a comparison. Although it can speed up the download start speed, sometimes some files may be lost, resulting in an incomplete mirror, so the client<br>cannot be updated.</p><h3 id="how-to-write-the-config-file"><a href="#how-to-write-the-config-file" class="headerlink" title="how to write the config file"></a>how to write the config file</h3><p>In order to download the complete package, we need to modify the configuration file in <code>/etc/apt/mirror.list</code>. Use this format to ensure that the i386 package will be downloaded.</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb-amd64 http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse</span><br><span class="line">deb-i386 http://mirrors.aliyun.com/ubuntu focal main restricted universe multiverse</span><br></pre></td></tr></table></figure><h2 id="Combine-them-together"><a href="#Combine-them-together" class="headerlink" title="Combine them together"></a>Combine them together</h2><p>Therefore, in order to achieve a balance between efficiency and completeness, we can combine apt-mirror and debmirror.<br>We can first use apt-mirror to download quickly, then we can use debmirror to check and download the missing packages.<br>Maybe this is the best way to download the Ubuntu mirror.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Common operations of Git</title>
+      <link href="/git/common-operations-of-git.html"/>
+      <url>/git/common-operations-of-git.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="Commit-code"><a href="#Commit-code" class="headerlink" title="Commit code"></a>Commit code</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;feat: xxxxxx&quot;</span></span><br></pre></td></tr></table></figure><h3 id="How-to-revoke-after-commit"><a href="#How-to-revoke-after-commit" class="headerlink" title="How to revoke after commit"></a>How to revoke after commit</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^</span><br></pre></td></tr></table></figure><p>This successfully revoked the commit. Note that only the commit operation is withdrawn, and the code modification remains.</p><h4 id="git-reset-parameters"><a href="#git-reset-parameters" class="headerlink" title="git reset parameters"></a>git reset parameters</h4><p><code>--mixed</code><br>do not delete the workspace to change the code, cancel the commit, and cancel the <code>git add .</code> operation. This is the default parameter.</p><p><code>--soft</code><br>do not delete the workspace to change the code, cancel the commit, and do not cancel the <code>git add .</code>.</p><p><code>--hard</code><br>delete workspace change code, revoke commit, revoke <code>git add .</code>. After completing this operation, it is restored to the last commit state.</p><span id="more"></span><h3 id="How-to-migrate-a-git-repository-to-another-remote-location"><a href="#How-to-migrate-a-git-repository-to-another-remote-location" class="headerlink" title="How to migrate a git repository to another remote location"></a>How to migrate a git repository to another remote location</h3><h4 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1"></a>Method 1</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url origin remote_git_address</span><br><span class="line">git push</span><br></pre></td></tr></table></figure><p>This method will only migrate the current branch to the new git.<br>In addition, this method could meet errors and fail, such as “error: source ref specification master does not match”.</p><h4 id="Method-2-better"><a href="#Method-2-better" class="headerlink" title="Method 2 (better)"></a>Method 2 (better)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --mirror remote_git_address</span><br></pre></td></tr></table></figure><p>This method only need one command to finish this job.</p><h3 id="How-to-save-username-and-password-of-git-in-Ubuntu"><a href="#How-to-save-username-and-password-of-git-in-Ubuntu" class="headerlink" title="How to save username and password of git in Ubuntu"></a>How to save username and password of git in Ubuntu</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano ~/.gitconfig</span><br></pre></td></tr></table></figure><p>Edit the config file and set this config:</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[credential]</span><br><span class="line">    helper = store</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Install Node.js on Linux</title>
+      <link href="/frontend/install-nodejs-on-linux.html"/>
+      <url>/frontend/install-nodejs-on-linux.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Using-NodeSource"><a href="#Using-NodeSource" class="headerlink" title="Using NodeSource"></a>Using NodeSource</h2><p>Refer to the <a href="https://github.com/nodesource/distributions/blob/master/README.md">NodeSource documentation</a> for more information on the available versions.</p><h3 id="Node-js-v14-x"><a href="#Node-js-v14-x" class="headerlink" title="Node.js v14.x:"></a>Node.js v14.x:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using Ubuntu</span></span><br><span class="line">curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using Debian, as root</span></span><br><span class="line">curl -fsSL https://deb.nodesource.com/setup_14.x | bash -</span><br><span class="line">apt-get install -y nodejs</span><br></pre></td></tr></table></figure><h3 id="Upgrade-npm"><a href="#Upgrade-npm" class="headerlink" title="Upgrade npm"></a>Upgrade npm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g npm</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> frontend </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> frontend </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Online expansion of Ubuntu LVM disk</title>
+      <link href="/devops/online-expansion-of-ubuntu-lvm-disk.html"/>
+      <url>/devops/online-expansion-of-ubuntu-lvm-disk.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="LVM-overview"><a href="#LVM-overview" class="headerlink" title="LVM overview"></a>LVM overview</h2><p><img src="/images/online-expansion-of-ubuntu-lvm-disk/lvm.png" alt="lvm"></p><h3 id="Physical-Volume-PV"><a href="#Physical-Volume-PV" class="headerlink" title="Physical Volume (PV)"></a>Physical Volume (PV)</h3><p>Refers to a disk partition, or a device (such as RAID) that has the same function as a disk partition. It is the basic storage logical block of LVM, but compared with basic physical storage media (such as partitions, disks, etc.), it contains LVM-related Management parameters.</p><h3 id="Volume-Group-VG"><a href="#Volume-Group-VG" class="headerlink" title="Volume Group (VG)"></a>Volume Group (VG)</h3><p>Similar to a physical disk in a non-LVM system, it is composed of one or more physical volumes PV. One or more LVs (logical volumes) can be created on the volume group.</p><h3 id="Logical-Volume-LV"><a href="#Logical-Volume-LV" class="headerlink" title="Logical Volume (LV)"></a>Logical Volume (LV)</h3><p>Similar to disk partitions in non-LVM systems, logical volumes are built on the volume group VG. A file system (such as &#x2F;home or &#x2F;usr, etc.) can be established on the logical volume LV.</p><span id="more"></span><h2 id="LVM-expansion-operation"><a href="#LVM-expansion-operation" class="headerlink" title="LVM expansion operation"></a>LVM expansion operation</h2><h3 id="Create-a-new-primary-partition"><a href="#Create-a-new-primary-partition" class="headerlink" title="Create a new primary partition"></a>Create a new primary partition</h3><p>If you expanded the hard disk size of the virtual machine, and you are still using one hard disk such as <code>/dev/sda</code>, you can do this:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk /dev/sda</span><br></pre></td></tr></table></figure><p>Enter <code>m</code> to view the help, enter <code>n</code> to create a new partition, select the primary partition, step by step, press <code>w</code> to write and save, and get <code>/dev/sda2</code>.</p><p>You can also add a new hard drive to the machine, and the new hard drive may be shown as <code>/dev/sdb</code>. The operation of creating a new partition is similar.</p><h3 id="Format-the-partition-as-ext4-format"><a href="#Format-the-partition-as-ext4-format" class="headerlink" title="Format the partition as ext4 format"></a>Format the partition as ext4 format</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkfs -t ext4 /dev/sda2</span><br></pre></td></tr></table></figure><p><code>/dev/sda2</code> represents the new partition, you can replace it with other paths according to your situation, for example <code>/dev/sdb1</code>.</p><h3 id="Find-the-VG-Name"><a href="#Find-the-VG-Name" class="headerlink" title="Find the VG Name"></a>Find the VG Name</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># vgdisplay</span></span><br><span class="line">  --- Volume group ---</span><br><span class="line">  VG Name               ubuntu--vg-root</span><br><span class="line">  System ID</span><br><span class="line">  Format                lvm2</span><br><span class="line">  ......</span><br></pre></td></tr></table></figure><h3 id="Add-the-new-partition-to-the-original-VG-of-lvm"><a href="#Add-the-new-partition-to-the-original-VG-of-lvm" class="headerlink" title="Add the new partition to the original VG of lvm"></a>Add the new partition to the original VG of lvm</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vgextend ubuntu--vg-root /dev/sda2</span><br></pre></td></tr></table></figure><h3 id="Check-the-VG"><a href="#Check-the-VG" class="headerlink" title="Check the VG"></a>Check the VG</h3><p>You should find that there are some free space in the volume group.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># vgdisplay</span></span><br><span class="line">  --- Volume group ---</span><br><span class="line">  VG Name               ubuntu--vg-root</span><br><span class="line">  System ID</span><br><span class="line">  Format                lvm2</span><br><span class="line">  Metadata Areas        2</span><br><span class="line">  Metadata Sequence No  5</span><br><span class="line">  VG Access             <span class="built_in">read</span>/write</span><br><span class="line">  VG Status             resizable</span><br><span class="line">  MAX LV                0</span><br><span class="line">  Cur LV                3</span><br><span class="line">  Open LV               3</span><br><span class="line">  Max PV                0</span><br><span class="line">  Cur PV                2</span><br><span class="line">  Act PV                2</span><br><span class="line">  VG Size               758.99 GiB</span><br><span class="line">  PE Size               4.00 MiB</span><br><span class="line">  Total PE              194302</span><br><span class="line">  Alloc PE / Size       15103 / &lt;59.00 GiB</span><br><span class="line">  Free  PE / Size       179199 / &lt;700.00 GiB</span><br></pre></td></tr></table></figure><h3 id="Check-the-LV"><a href="#Check-the-LV" class="headerlink" title="Check the LV"></a>Check the LV</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># lvdisplay</span></span><br><span class="line">  --- Logical volume ---</span><br><span class="line">  LV Path                /dev/ubuntu--vg-root/lv-root</span><br><span class="line">  LV Name                lv-root</span><br><span class="line">  VG Name                ubuntu--vg-root</span><br><span class="line">  LV UUID                KiPSR5-XXvZ-JaXz-fyTw-EE0U-NV7E-6ohpCN</span><br><span class="line">  LV Write Access        <span class="built_in">read</span>/write</span><br><span class="line">  LV Creation host, time ubuntu-server, 2018-11-15 06:06:41 +0000</span><br><span class="line">  LV Status              available</span><br><span class="line">  <span class="comment"># open                 1</span></span><br><span class="line">  LV Size                45.00 GiB</span><br><span class="line">  Current LE             11520</span><br><span class="line">  Segments               1</span><br><span class="line">  Allocation             inherit</span><br><span class="line">  Read ahead sectors     auto</span><br><span class="line">  - currently <span class="built_in">set</span> to     256</span><br><span class="line">  Block device           253:0</span><br></pre></td></tr></table></figure><h3 id="Extend-the-LV"><a href="#Extend-the-LV" class="headerlink" title="Extend the LV"></a>Extend the LV</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># lvextend -L 700G /dev/ubuntu--vg-root/lv-root</span></span><br><span class="line">  Size of logical volume ubuntu--vg-root/lv-root changed from 45.00 GiB (11520 extents) to 700.00 GiB (179200 extents).</span><br><span class="line">  Logical volume ubuntu--vg-root/lv-root successfully resized.</span><br></pre></td></tr></table></figure><h3 id="Find-the-root-file-system-name"><a href="#Find-the-root-file-system-name" class="headerlink" title="Find the root file system name"></a>Find the root file system name</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># df -h</span></span><br><span class="line">Filesystem                       Size  Used Avail Use% Mounted on</span><br><span class="line">udev                              16G     0   16G   0% /dev</span><br><span class="line">tmpfs                            3.2G   19M  3.2G   1% /run</span><br><span class="line">/dev/mapper/ubuntu--vg-root       45G  5.3G   37G  13% /</span><br></pre></td></tr></table></figure><h3 id="Resize-file-system"><a href="#Resize-file-system" class="headerlink" title="Resize file system"></a>Resize file system</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># resize2fs -p /dev/mapper/ubuntu--vg-root</span></span><br><span class="line">resize2fs 1.44.1 (24-Mar-2018)</span><br><span class="line">Filesystem at /dev/mapper/ubuntu--vg-root is mounted on /; on-line resizing required</span><br><span class="line">old_desc_blocks = 6, new_desc_blocks = 88</span><br><span class="line">The filesystem on /dev/mapper/ubuntu--vg-root is now 183500800 (4k) blocks long.</span><br></pre></td></tr></table></figure><h3 id="View-the-latest-hard-drive-size"><a href="#View-the-latest-hard-drive-size" class="headerlink" title="View the latest hard drive size"></a>View the latest hard drive size</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">~<span class="comment"># df -h</span></span><br><span class="line">Filesystem                       Size  Used Avail Use% Mounted on</span><br><span class="line">udev                              16G     0   16G   0% /dev</span><br><span class="line">tmpfs                            3.2G   59M  3.1G   2% /run</span><br><span class="line">/dev/mapper/ubuntu--vg-root      689G  5.4G  655G   1% /</span><br></pre></td></tr></table></figure><h2 id="How-to-reduce-the-LV-size"><a href="#How-to-reduce-the-LV-size" class="headerlink" title="How to reduce the LV size"></a>How to reduce the LV size</h2><p>You can use the <code>lvreduce</code> command.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Use pprof for golang program memory analysis</title>
+      <link href="/golang/use-pprof-for-golang-program-memory-analysis.html"/>
+      <url>/golang/use-pprof-for-golang-program-memory-analysis.html</url>
+      
+        <content type="html"><![CDATA[<p>When using golang to write complex projects, it is often useful to use multi-coroutine concurrency scenarios. At this time, it is easy to cause the problem of coroutine leaks due to negligence, and then produce similar memory leaks. This article focuses on the investigation of coroutine leaks, and provides ideas and practices for visual analysis of golang program memory.</p><h2 id="Introduction-to-pprof"><a href="#Introduction-to-pprof" class="headerlink" title="Introduction to pprof"></a>Introduction to pprof</h2><p>pprof is a tool for visualization and analysis of profiling data.<br>pprof reads a collection of profiling samples in profile.proto format and generates reports to visualize and help analyze the data. It can generate both text and graphical reports (through the use of the dot visualization package).</p><h2 id="How-to-use-pprof"><a href="#How-to-use-pprof" class="headerlink" title="How to use pprof"></a>How to use pprof</h2><h3 id="Add-monitoring-code"><a href="#Add-monitoring-code" class="headerlink" title="Add monitoring code"></a>Add monitoring code</h3><p>First, we need to add monitoring code in the golang program, and expose it through the http interface.</p><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> _ <span class="string">&quot;net/http/pprof&quot;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;net/http&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">_ = http.ListenAndServe(<span class="string">&quot;0.0.0.0:8081&quot;</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;()</span><br><span class="line"><span class="comment">// your code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>Then we start the program that needs to be analyzed, and we are ready to analyze it.</p><span id="more"></span><h3 id="How-to-check-the-memory-size-of-each-module"><a href="#How-to-check-the-memory-size-of-each-module" class="headerlink" title="How to check the memory size of each module"></a>How to check the memory size of each module</h3><p>By analyzing the size of the memory occupied by each module and function, memory leaks can be found very effectively.</p><h4 id="Command-line-method-to-generate-visual-analysis-images"><a href="#Command-line-method-to-generate-visual-analysis-images" class="headerlink" title="Command line method to generate visual analysis images"></a>Command line method to generate visual analysis images</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof <span class="literal">-alloc_space</span> <span class="literal">-cum</span> http://localhost:<span class="number">8081</span>/debug/pprof/heap</span><br></pre></td></tr></table></figure><p>After the command is run, enter <code>web</code> in the console and press <code>Enter</code>, and a svg picture will be opened with the default viewing software of <code>.svg</code>, showing the memory usage diagram of each module. If you enter <code>web</code> and report an error of <code>Failed to execute dot. Is Graphviz installed? Error: exec: &quot;dot&quot;: executable file not found in %PATH%</code>, it is because <code>Graphviz</code> is not installed on the computer, which is a component that image generation depends on. The solution is: Open <a href="https://graphviz.gitlab.io/download/">https://graphviz.gitlab.io/download/</a> and follow the prompts to download and install. After the installation is complete, for Windows, add the <code>bin</code> folder of the Graphviz installation path after setting the environment variable path.</p><h4 id="View-specific-data-list-in-web-browser"><a href="#View-specific-data-list-in-web-browser" class="headerlink" title="View specific data list in web browser"></a>View specific data list in web browser</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8081/debug/pprof/heap?debug=1</span><br></pre></td></tr></table></figure><h3 id="How-to-view-the-number-of-coroutines-created-by-each-module"><a href="#How-to-view-the-number-of-coroutines-created-by-each-module" class="headerlink" title="How to view the number of coroutines created by each module"></a>How to view the number of coroutines created by each module</h3><p>By analyzing the number of coroutines created by each module and function, coroutine leaks can be checked very effectively. If there is coroutine leaks, the number of coroutines in the corresponding modules is astonishing.</p><h4 id="Command-line-method-to-generate-visual-analysis-images-1"><a href="#Command-line-method-to-generate-visual-analysis-images-1" class="headerlink" title="Command line method to generate visual analysis images"></a>Command line method to generate visual analysis images</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go tool pprof http://localhost:<span class="number">8081</span>/debug/pprof/goroutine</span><br></pre></td></tr></table></figure><p>After the command runs, enter <code>web</code> in the console and press <code>Enter</code>.</p><h4 id="View-specific-data-list-in-web-browser-1"><a href="#View-specific-data-list-in-web-browser-1" class="headerlink" title="View specific data list in web browser"></a>View specific data list in web browser</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8081/debug/pprof/goroutine?debug=1</span><br></pre></td></tr></table></figure><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The above is an introduction to the simple use of pprof, I believe it will be helpful to troubleshoot memory leaks and coroutine leaks in golang. If you need more detailed usage, please refer to the official pprof documentation.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> golang </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Improve your Ubuntu performance</title>
+      <link href="/devops/improve-your-ubuntu-performance.html"/>
+      <url>/devops/improve-your-ubuntu-performance.html</url>
+      
+        <content type="html"><![CDATA[<p>When you install the Ubuntu system on a physical machine, don’t forget to do these things to improve your computer’s performance.<br>My experiments found that the improvement was very noticeable, based on Ubuntu 20.10.</p><h2 id="use-s-tui-to-monitor-and-test-your-max-CPU-frequency"><a href="#use-s-tui-to-monitor-and-test-your-max-CPU-frequency" class="headerlink" title="use s-tui to monitor and test your max CPU frequency"></a>use s-tui to monitor and test your max CPU frequency</h2><p><img src="/images/improve-your-ubuntu-performance/s-tui.png" alt="s-tui"></p><h3 id="how-to-install"><a href="#how-to-install" class="headerlink" title="how to install"></a>how to install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python3-pip stress</span><br><span class="line">sudo pip3 install s-tui</span><br></pre></td></tr></table></figure><h3 id="how-to-use"><a href="#how-to-use" class="headerlink" title="how to use"></a>how to use</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo s-tui</span><br></pre></td></tr></table></figure><p>You can use the arrow keys and space bar to switch between Monitor mode and Stress mode. The Stress mode performs a stress test on the CPU.</p><h2 id="use-indicator-cpufreq-to-set-your-CPU-frequency"><a href="#use-indicator-cpufreq-to-set-your-CPU-frequency" class="headerlink" title="use indicator-cpufreq to set your CPU frequency"></a>use indicator-cpufreq to set your CPU frequency</h2><p><img src="/images/improve-your-ubuntu-performance/indicator-cpufreq.png" alt="indicator-cpufreq"></p><h3 id="how-to-install-1"><a href="#how-to-install-1" class="headerlink" title="how to install"></a>how to install</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install indicator-cpufreq</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure><h3 id="how-to-use-1"><a href="#how-to-use-1" class="headerlink" title="how to use"></a>how to use</h3><p>Look at the status bar icon in the upper right corner and click on the emerging icon to set the CPU’s performance mode.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> devops </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> devops </tag>
+            
+            <tag> ubuntu </tag>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Migrate mgo to qmgo</title>
+      <link href="/golang/migrate-mgo-to-qmgo.html"/>
+      <url>/golang/migrate-mgo-to-qmgo.html</url>
+      
+        <content type="html"><![CDATA[<h2 id="Why-migrate-to-qmgo"><a href="#Why-migrate-to-qmgo" class="headerlink" title="Why migrate to qmgo"></a>Why migrate to qmgo</h2><ul><li>Mgo is a convenient library for golang to operate mongodb, but it does not support the latest features of mongodb, such as Transaction.</li><li>My old project is written in mgo. If I want to migrate to the official mongo-driver, its syntax is more primitive, the usage difference is large, and the migration cost will be higher.</li><li>I found a library called qmgo, which is based on the official mongo-driver package, but it is closer to mgo in terms of syntax and suitable for simple and rude migrations.</li></ul><p>Below I will record the methods used in the migration process, which I found out by myself. If you have any questions, please correct me.</p><h2 id="Batch-replacement"><a href="#Batch-replacement" class="headerlink" title="Batch replacement"></a>Batch replacement</h2><ul><li>Batch replace <code>github.com/globalsign/mgo/bson</code> with <code>go.mongodb.org/mongo-driver/bson</code></li><li>Batch replace <code>bson.NewObjectId()</code> with <code>primitive.NewObjectID()</code></li><li>Batch replace <code>bson.ObjectId</code> with <code>primitive.ObjectID</code></li><li>Batch replace <code>.Find(bson.M</code> with <code>.Find(c, bson.M</code></li><li>Batch replace <code>.Find(search</code> to <code>.Find(c, search</code></li><li>Batch replace <code>.Insert(</code> to <code>.InsertOne(c,</code></li><li>Batch replace <code>.Update(</code> to <code>.UpdateOne(c,</code></li><li>Batch replace <code>.RemoveAll(</code> to <code>.RemoveAll(c,</code></li><li>Batch replace <code>.Remove(</code> to <code>.Remove(c,</code></li><li>Batch replace <code>errors.Is(err, mgo.ErrNotFound)</code> with <code>qmgo.IsErrNoDocuments(err)</code></li><li>Batch replace <code>.EnsureIndex(mgo.Index&#123;</code> for<br><code>.CreateOneIndex(c, options.IndexModel&#123;</code></li></ul><h2 id="Copy-and-paste"><a href="#Copy-and-paste" class="headerlink" title="Copy and paste"></a>Copy and paste</h2><ul><li>Where there is no context, copy and paste everywhere <code>c := context.Background()</code></li><li>If it is in the interface method of gin, you can directly use gin’s <code>c *gin.Context</code> (but if multi-coroutine operation needs to Copy gin’s Context)</li></ul><h2 id="Function-substitution"><a href="#Function-substitution" class="headerlink" title="Function substitution"></a>Function substitution</h2><ul><li>Replace the bson.IsObjectIdHex() method:</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> db</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;go.mongodb.org/mongo-driver/bson/primitive&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">IsObjectIDHex</span><span class="params">(hex <span class="type">string</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">_, err := primitive.ObjectIDFromHex(hex)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>Replace the bson.ObjectIdHex() method:</li></ul><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> db</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">&quot;fmt&quot;</span></span><br><span class="line"><span class="string">&quot;go.mongodb.org/mongo-driver/bson/primitive&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">ObjectIDHex</span><span class="params">(hex <span class="type">string</span>)</span></span> primitive.ObjectID &#123;</span><br><span class="line">id, err := primitive.ObjectIDFromHex(hex)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="built_in">panic</span>(fmt.Sprintf(<span class="string">&quot;Invalid input to ObjectIDHex: %+v&quot;</span>, hex))</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> id</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>These functions can be placed in the package of the auxiliary method or the package of the database operation, and then replace the references in batches.</p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>At this point, the project completed the migration within two hours and started running smoothly.<br>Thanks to the author of qmgo for making the wheels for me.<br>If I have the opportunity, I will also open up some wheels.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> golang </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Why write this blog</title>
+      <link href="/idea/why-write-this-blog.html"/>
+      <url>/idea/why-write-this-blog.html</url>
+      
+        <content type="html"><![CDATA[<ol><li>Human memory is very unreliable and easy to forget. Only by recording it permanently in words can you keep your memory for a longer time.</li><li>There are also many good content on the Internet that are worth collecting, but other people’s blogs are not necessarily stable and reliable. It is possible that they are still there today and will be closed after a few days. I have to rely on myself to record reliably. After the knowledge is summarized and sorted out by myself, I also understand it more deeply.</li><li>I hope that I will live forever, but this is not realistic. I hope this is an “immortal” blog that will perpetuate my knowledge and memory.</li><li>This is not my first blog, and maybe it is not the last. There may be different ideas at every stage of life, and not all of these ideas are suitable for sharing.</li><li>This blog is purely a technical blog, recording technical content. Ideas may change, technology is immortal, and truth is immortal.</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> idea </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> idea </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
