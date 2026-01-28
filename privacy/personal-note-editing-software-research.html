@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Personal note editing software research | Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Personal note editing software research"/>
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism-line-numbers.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link id="modern-theme-css" rel="stylesheet" href="/css/modern-improvements.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/theme-switcher.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		  <li>
+			<a href="#" id="theme-toggle-btn" title="Switch between modern and retro themes">
+			  <i class="fa fa-refresh"></i>Retro Theme
+			</a>
+		  </li>
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Personal note editing software research</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="Personal-note-editing-needs"><a href="#Personal-note-editing-needs" class="headerlink" title="Personal note editing needs"></a>Personal note editing needs</h2><h3 id="Core-requirements"><a href="#Core-requirements" class="headerlink" title="Core requirements:"></a>Core requirements:</h3><ul>
+<li>Edit and save content in markdown format, which makes the format simple, easy to use, open, and easy to migrate</li>
+<li>Support WYSIWYG mode when editing, similar to Typora</li>
+<li>Open source, thus keeping content safe and free</li>
+<li>Support offline use, data can be stored locally, or stored in third-party channels such as Google Drive, Github repository</li>
+<li>Support direct copying of pictures and text on web pages and paste them directly</li>
+<li>Open the folder and display the file directory structure, which is convenient for placing and organizing notes according to the file directory from the sidebar</li>
+<li>Supports the creation of internal links between markdown files, which can be easily jumped</li>
+<li>Supports relationship graphs showing internal links in documents</li>
+</ul>
+<h3 id="Optional-Requirements"><a href="#Optional-Requirements" class="headerlink" title="Optional Requirements"></a>Optional Requirements</h3><ul>
+<li>Supports loading plugins to extend functionality</li>
+<li>Open the online version editor directly from the web browser, call the file API to open the local folder for editing, therefore even chromebook can use it</li>
+</ul>
+<h2 id="Software-solutions"><a href="#Software-solutions" class="headerlink" title="Software solutions"></a>Software solutions</h2><blockquote>
+<p>Note: The evaluations below reflect my personal testing and observations <strong>as of 2022-10-15</strong>. Product features and maintenance status may have changed since then.</p>
+</blockquote>
+<ul>
+<li>✅<strong>Logseq</strong> : Not perfect, but currently the most recommended</li>
+<li>Advantages:<ul>
+<li>Open source, most functions are as easy to use as Obsidian, such as beautiful appearance, local data storage, support for bidirectional links and relationship graphs</li>
+<li>There is a web version, you can directly open the local folder</li>
+</ul>
+</li>
+<li>Shortcomings:<ul>
+<li>The directory structure browsing is not supported, and all the notes are mixed together and it is not easy to classify. Solution: If you find a way to write a “navigation document”, similar to the Yellow Pages, and then bookmark it, and add a link to the Yellow Pages every time you add a sub-document, it may also be a convenient way to find files by category. This is still not convenient like a directory, but it can be adapted.</li>
+<li>At the time, the md standard checkbox rendering was not supported.</li>
+</ul>
+</li>
+<li>❗<strong>Notion</strong>: It is basically free and easy to use, but at the time there was no offline mode that met my needs, and local storage&#x2F;own-sync workflows were not supported. That introduces privacy concerns for my use case. However, it supports real-time collaboration and can be used on projects, but is not suitable for storing personal core data.</li>
+<li>❗<strong>Obsidian</strong>: It is completely free, easy to use, and supports all requirements except open source, but it is not open source. There is currently no better option for personal use.</li>
+<li>❗<strong>VSCode+Office Viewer plugin</strong> (based on vditor): open source, md editing function is very powerful, and there is a toolbar. But bidirectional links and relational graphs are not supported. It can be said to be a good md editor, but not a very good note editor. And this plugin does not support running in the VSCode web.</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li>❌<strong>marktext</strong>: Open source, easy to develop based on electron, the implementation of editing functions is close to the requirements, you can consider implementing Obsidian functions by yourself: internal links and jumps in notes, relationship graphs, and improve its interface. However, in practice, it was found that there are some serious bugs in its editing components, such as strange bugs when pasting pictures.</li>
+<li>❌<strong>Typora</strong>: The editing function is easy to use, but it is not open source and charges.</li>
+<li>❌StackEdit: Open source, supports directory browsing, but at the time it appeared unmaintained, and some functions such as GitHub sync were unreliable.</li>
+<li>❌<strong>Joplin</strong>: Open source, but the interface is old, the markdown display felt behind at the time (for example, checkbox rendering in my setup), and it did not support internal links and jumps in the document.</li>
+<li>❌<strong>AthensResearch</strong>: Supports relational graphs, but does not support markdown, and data seems not easy to export.</li>
+<li>❌<strong>VSCode</strong>: Open source, but does not support direct pasting of web page content, and the function of pasting pictures is not well supported</li>
+<li>❌<strong>VSCode+Foam plugin</strong>: Supports internal links (only in VSCode’s default markdown text editor mode, cannot combine with Office Viewer plugin) and relational graphs (the styles are not good), but the inability to paste web content and pictures directly is the biggest problem.</li>
+<li>❌<strong>Ghostwriter</strong>: Open source, but only supports opening a single file, does not support opening a directory</li>
+<li>❌<strong>Haroopad</strong>: Open source, but only supports opening a single file, does not support opening a directory</li>
+</ul>
+
+	  
+	  <hr>
+	  <p>Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/devops/copy_and_paste_content_to_markdown.html" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+    <section id="comment">
+      <h2 class="title">Comments</h2>
+      
+         <script>
+           // Determine theme based on user preference
+           const savedTheme = localStorage.getItem('hexo-theme-preference') || 'modern';
+           const utterancesTheme = savedTheme === 'modern'
+             ? 'github-light'
+             : 'photon-dark';
+
+           // Create and configure utterances script
+           const utterancesScript = document.createElement('script');
+           utterancesScript.src = 'https://utteranc.es/client.js';
+           utterancesScript.setAttribute('repo', 'immortal-blog/immortal-blog.github.io');
+           utterancesScript.setAttribute('issue-term', 'pathname');
+           utterancesScript.setAttribute('theme', utterancesTheme);
+           utterancesScript.setAttribute('crossorigin', 'anonymous');
+           utterancesScript.async = true;
+
+           document.getElementById('comment').appendChild(utterancesScript);
+         </script>
+      
+    </section>
+    
+    
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2022-10-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/privacy/">privacy<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/idea/">idea<span>5</span></a></li> <li><a href="/tags/privacy/">privacy<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Personal-note-editing-needs"><span class="toc-article-text">Personal note editing needs</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Core-requirements"><span class="toc-article-text">Core requirements:</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Optional-Requirements"><span class="toc-article-text">Optional Requirements</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Software-solutions"><span class="toc-article-text">Software solutions</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2026 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.
+     <br> Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

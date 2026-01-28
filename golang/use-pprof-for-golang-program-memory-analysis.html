@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Use pprof for golang program memory analysis | Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Use pprof for golang program memory analysis"/>
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism-line-numbers.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link id="modern-theme-css" rel="stylesheet" href="/css/modern-improvements.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/theme-switcher.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		  <li>
+			<a href="#" id="theme-toggle-btn" title="Switch between modern and retro themes">
+			  <i class="fa fa-refresh"></i>Retro Theme
+			</a>
+		  </li>
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Use pprof for golang program memory analysis</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <p>When using golang to write complex projects, it is often useful to use multi-goroutine concurrency scenarios. At this time, it is easy to cause the problem of goroutine leaks due to negligence, and then produce similar memory leaks. This article focuses on the investigation of goroutine leaks, and provides ideas and practices for visual analysis of golang program memory.</p>
+<h2 id="Introduction-to-pprof"><a href="#Introduction-to-pprof" class="headerlink" title="Introduction to pprof"></a>Introduction to pprof</h2><p>pprof is a tool for visualization and analysis of profiling data.<br>pprof reads a collection of profiling samples in profile.proto format and generates reports to visualize and help analyze the data. It can generate both text and graphical reports (through the use of the dot visualization package).</p>
+<h2 id="How-to-use-pprof"><a href="#How-to-use-pprof" class="headerlink" title="How to use pprof"></a>How to use pprof</h2><h3 id="Add-monitoring-code"><a href="#Add-monitoring-code" class="headerlink" title="Add monitoring code"></a>Add monitoring code</h3><p>First, we need to add monitoring code in the golang program, and expose it through the http interface.</p>
+<pre class="line-numbers language-golang" data-language="golang"><code class="language-golang">package main
+
+import _ &quot;net&#x2F;http&#x2F;pprof&quot;
+import &quot;net&#x2F;http&quot;
+
+func main() &#123;
+	go func() &#123;
+		_ &#x3D; http.ListenAndServe(&quot;0.0.0.0:8081&quot;, nil)
+	&#125;()
+	&#x2F;&#x2F; your code
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Note: Exposing pprof on <code>0.0.0.0</code> makes it accessible on the network. If you don’t need remote access, prefer <code>127.0.0.1</code>.</p>
+<p>Then we start the program that needs to be analyzed, and we are ready to analyze it.</p>
+<span id="more"></span>
+
+<h3 id="How-to-check-the-memory-size-of-each-function-x2F-package"><a href="#How-to-check-the-memory-size-of-each-function-x2F-package" class="headerlink" title="How to check the memory size of each function&#x2F;package"></a>How to check the memory size of each function&#x2F;package</h3><p>By analyzing the size of the memory occupied by each module and function, memory leaks can be found very effectively.</p>
+<h4 id="Command-line-method-to-generate-visual-analysis-images"><a href="#Command-line-method-to-generate-visual-analysis-images" class="headerlink" title="Command line method to generate visual analysis images"></a>Command line method to generate visual analysis images</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool pprof -alloc_space -cum http://localhost:8081/debug/pprof/heap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>After the command is run, enter <code>web</code> in the console and press <code>Enter</code>, and the default SVG viewer will open, showing the memory usage diagram of each function&#x2F;package. If you enter <code>web</code> and report an error of <code>Failed to execute dot. Is Graphviz installed? Error: exec: &quot;dot&quot;: executable file not found in %PATH%</code>, it is because <code>Graphviz</code> is not installed on the computer, which is a component that image generation depends on. The solution is: Open <a target="_blank" rel="noopener" href="https://graphviz.gitlab.io/download/">https://graphviz.gitlab.io/download/</a> and follow the prompts to download and install. After the installation is complete, for Windows, add the <code>bin</code> folder of the Graphviz installation path after setting the environment variable path.</p>
+<h4 id="View-specific-data-list-in-web-browser"><a href="#View-specific-data-list-in-web-browser" class="headerlink" title="View specific data list in web browser"></a>View specific data list in web browser</h4><pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;localhost:8081&#x2F;debug&#x2F;pprof&#x2F;heap?debug&#x3D;1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="How-to-view-the-number-of-goroutines-created-by-each-function-x2F-package"><a href="#How-to-view-the-number-of-goroutines-created-by-each-function-x2F-package" class="headerlink" title="How to view the number of goroutines created by each function&#x2F;package"></a>How to view the number of goroutines created by each function&#x2F;package</h3><p>By analyzing the number of goroutines created by each function&#x2F;package, goroutine leaks can be checked very effectively. If there is goroutine leaks, the number of goroutines in the corresponding functions&#x2F;packages is astonishing.</p>
+<h4 id="Command-line-method-to-generate-visual-analysis-images-1"><a href="#Command-line-method-to-generate-visual-analysis-images-1" class="headerlink" title="Command line method to generate visual analysis images"></a>Command line method to generate visual analysis images</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">go tool pprof http://localhost:8081/debug/pprof/goroutine<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>After the command runs, enter <code>web</code> in the console and press <code>Enter</code>.</p>
+<h4 id="View-specific-data-list-in-web-browser-1"><a href="#View-specific-data-list-in-web-browser-1" class="headerlink" title="View specific data list in web browser"></a>View specific data list in web browser</h4><pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;localhost:8081&#x2F;debug&#x2F;pprof&#x2F;goroutine?debug&#x3D;1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>The above is an introduction to the simple use of pprof, I believe it will be helpful to troubleshoot memory leaks and goroutine leaks in golang. If you need more detailed usage, please refer to the official pprof documentation.</p>
+
+	  
+	  <hr>
+	  <p>Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/devops/online-expansion-of-ubuntu-lvm-disk.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/devops/improve-your-ubuntu-performance.html" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+    <section id="comment">
+      <h2 class="title">Comments</h2>
+      
+         <script>
+           // Determine theme based on user preference
+           const savedTheme = localStorage.getItem('hexo-theme-preference') || 'modern';
+           const utterancesTheme = savedTheme === 'modern'
+             ? 'github-light'
+             : 'photon-dark';
+
+           // Create and configure utterances script
+           const utterancesScript = document.createElement('script');
+           utterancesScript.src = 'https://utteranc.es/client.js';
+           utterancesScript.setAttribute('repo', 'immortal-blog/immortal-blog.github.io');
+           utterancesScript.setAttribute('issue-term', 'pathname');
+           utterancesScript.setAttribute('theme', utterancesTheme);
+           utterancesScript.setAttribute('crossorigin', 'anonymous');
+           utterancesScript.async = true;
+
+           document.getElementById('comment').appendChild(utterancesScript);
+         </script>
+      
+    </section>
+    
+    
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-01-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/golang/">golang<span>2</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/golang/">golang<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Introduction-to-pprof"><span class="toc-article-text">Introduction to pprof</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#How-to-use-pprof"><span class="toc-article-text">How to use pprof</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Add-monitoring-code"><span class="toc-article-text">Add monitoring code</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#How-to-check-the-memory-size-of-each-function-x2F-package"><span class="toc-article-text">How to check the memory size of each function&#x2F;package</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Command-line-method-to-generate-visual-analysis-images"><span class="toc-article-text">Command line method to generate visual analysis images</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#View-specific-data-list-in-web-browser"><span class="toc-article-text">View specific data list in web browser</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#How-to-view-the-number-of-goroutines-created-by-each-function-x2F-package"><span class="toc-article-text">How to view the number of goroutines created by each function&#x2F;package</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Command-line-method-to-generate-visual-analysis-images-1"><span class="toc-article-text">Command line method to generate visual analysis images</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#View-specific-data-list-in-web-browser-1"><span class="toc-article-text">View specific data list in web browser</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Summary"><span class="toc-article-text">Summary</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2026 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.
+     <br> Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

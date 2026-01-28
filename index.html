@@ -1,0 +1,945 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism-line-numbers.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link id="modern-theme-css" rel="stylesheet" href="/css/modern-improvements.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/theme-switcher.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		  <li>
+			<a href="#" id="theme-toggle-btn" title="Switch between modern and retro themes">
+			  <i class="fa fa-refresh"></i>Retro Theme
+			</a>
+		  </li>
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 <div class="page-header logo">
+  <h1>Immortal Blog<span class="blink-fast">∎</span></h1>
+</div>
+
+<div class="row page">
+
+	
+	<div class="col-md-9">
+	
+
+		<div class="slogan">
+
+
+		<i class="fa fa-heart blink-slow"></i>
+
+		An awesome blog about software development and network security.
+
+</div>    
+
+		<div id="top_search"></div>
+		<div class="mypage">
+		
+		<!-- title and entry -->
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/how-to-use-the-keyboard-on-a-mac-like-on-windows.html" >How to Use the Keyboard on a Mac Like on Windows</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2026-01-24  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>This document aims to help users adapt their Mac keyboard habits to be more like Windows by using <code>Karabiner-Elements</code>.</p>
+<h2 id="Basic-Settings"><a href="#Basic-Settings" class="headerlink" title="Basic Settings"></a>Basic Settings</h2><h3 id="1-Install-Karabiner-Elements"><a href="#1-Install-Karabiner-Elements" class="headerlink" title="1. Install Karabiner-Elements"></a>1. Install Karabiner-Elements</h3><p>First, you need to download and install <code>Karabiner-Elements</code> from the official website: <a target="_blank" rel="noopener" href="https://karabiner-elements.pqrs.org/">https://karabiner-elements.pqrs.org/</a>.</p>
+<h3 id="2-Simple-Modifications"><a href="#2-Simple-Modifications" class="headerlink" title="2. Simple Modifications"></a>2. Simple Modifications</h3><p>With the “Simple Modifications” feature in Karabiner-Elements, you can easily map keys. For example, you can set the following mappings:</p>
+<ul>
+<li><code>left_command</code> to <code>left_option</code></li>
+<li><code>left_control</code> to <code>left_command</code></li>
+<li><code>left_option</code> to <code>left_control</code></li>
+</ul>
+<p>This helps to make the Mac keyboard behavior more consistent with Windows habits.</p>
+<h2 id="Advanced-Custom-Rules-Complex-Modifications"><a href="#Advanced-Custom-Rules-Complex-Modifications" class="headerlink" title="Advanced Custom Rules (Complex Modifications)"></a>Advanced Custom Rules (Complex Modifications)</h2><p>Beyond simple modifications, Karabiner-Elements also supports “Complex Modifications”. In the Karabiner-Elements application, navigate to the “Complex Modifications” tab and click <strong>Add your own rule</strong> to add custom rules.</p>
+<p>Below are some common custom rule JSON codes that you can paste into the new rule editor.</p>
+<h3 id="1-Use-the-Left-Shift-Key-to-Switch-Input-Methods"><a href="#1-Use-the-Left-Shift-Key-to-Switch-Input-Methods" class="headerlink" title="1. Use the Left Shift Key to Switch Input Methods"></a>1. Use the Left Shift Key to Switch Input Methods</h3><p>This rule allows you to switch input methods with a short press of the left <code>Shift</code> key, while a long press retains its original function.</p>
+<p>*Source: <a target="_blank" rel="noopener" href="https://idawnlight.com/2022/use-left-shift-to-switch-input-sources-on-macos/">https://idawnlight.com/2022/use-left-shift-to-switch-input-sources-on-macos/</a></p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Use left_shift to switch input sources"</span><span class="token punctuation">,</span>
+    <span class="token property">"manipulators"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"conditions"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"bundle_identifiers"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                        <span class="token string">"^com\.teamviewer\.TeamViewer$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.vmware\.horizon$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.vmware\.fusion$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.vmware\.view$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.parallels\.desktop$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.parallels\.vm$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.parallels\.desktop\.console$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^org\.virtualbox\.app\.VirtualBoxVM$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.citrix\.XenAppViewer$"</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.vmware\.proxyApp\."</span><span class="token punctuation">,</span>
+                        <span class="token string">"^com\.parallels\.winapp\."</span>
+                    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"frontmost_application_unless"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"from"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                <span class="token property">"key_code"</span><span class="token operator">:</span> <span class="token string">"left_shift"</span><span class="token punctuation">,</span>
+                <span class="token property">"modifiers"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token property">"optional"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"caps_lock"</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+            <span class="token property">"parameters"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                <span class="token property">"basic.to_if_alone_timeout_milliseconds"</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+                <span class="token property">"basic.to_if_held_down_threshold_milliseconds"</span><span class="token operator">:</span> <span class="token number">200</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+            <span class="token property">"to"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"key_code"</span><span class="token operator">:</span> <span class="token string">"left_shift"</span><span class="token punctuation">,</span>
+                    <span class="token property">"lazy"</span><span class="token operator">:</span> <span class="token boolean">true</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"to_if_alone"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">&#123;</span>
+                    <span class="token property">"key_code"</span><span class="token operator">:</span> <span class="token string">"spacebar"</span><span class="token punctuation">,</span>
+                    <span class="token property">"modifiers"</span><span class="token operator">:</span> <span class="token string">"control"</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"to_if_held_down"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token property">"key_code"</span><span class="token operator">:</span> <span class="token string">"left_shift"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"basic"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-Make-the-Stop-Key-Actually-Stop-Music"><a href="#2-Make-the-Stop-Key-Actually-Stop-Music" class="headerlink" title="2. Make the Stop Key Actually Stop Music"></a>2. Make the Stop Key Actually Stop Music</h3><p>This rule maps the “Stop” key on the keyboard (usually in the F-key row) to execute the stop command in the “Music” application.</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Make Stop Key actually STOP Music"</span><span class="token punctuation">,</span>
+    <span class="token property">"manipulators"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"from"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+                <span class="token property">"consumer_key_code"</span><span class="token operator">:</span> <span class="token string">"stop"</span><span class="token punctuation">,</span>
+                <span class="token property">"modifiers"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token property">"optional"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"any"</span><span class="token punctuation">]</span> <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+            <span class="token property">"to"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token property">"shell_command"</span><span class="token operator">:</span> <span class="token string">"/usr/bin/osascript -e 'tell application \"Music\" to stop'"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"basic"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="3-Map-the-Calculator-Key-to-Open-the-Calculator-App"><a href="#3-Map-the-Calculator-Key-to-Open-the-Calculator-App" class="headerlink" title="3. Map the Calculator Key to Open the Calculator App"></a>3. Map the Calculator Key to Open the Calculator App</h3><p>This rule maps the calculator shortcut key on the keyboard (if available) to open the built-in calculator application on macOS.</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">"Map Fn+F8 (Calculator Key) to Open Calculator App"</span><span class="token punctuation">,</span>
+    <span class="token property">"manipulators"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token property">"from"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span> <span class="token property">"consumer_key_code"</span><span class="token operator">:</span> <span class="token string">"al_calculator"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+            <span class="token property">"to"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span> <span class="token property">"shell_command"</span><span class="token operator">:</span> <span class="token string">"open -a 'Calculator.app'"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token property">"type"</span><span class="token operator">:</span> <span class="token string">"basic"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+	
+	</div>
+  <a type="button" href="/how-to-use-the-keyboard-on-a-mac-like-on-windows.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/disable-vbs-on-windows-11-24h2.html" >The Ultimate Guide to Disabling VBS on Windows 11 24H2</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2025-10-05  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>If you’re encountering errors like “This host does not support AMD-V” or “Intel VT-x is unavailable” when using VMware Workstation, VirtualBox, or other virtualization software, you likely need to disable Windows 11’s VBS (Virtualization-Based Security).</p>
+<p><strong>Critical Update</strong>: On some Windows 11 24H2 systems, disabling VBS can be more complex. Based on personal testing, traditional methods were not sufficient unless I also disabled the Windows Hello-related registry switch described in Step 5.3.</p>
+<hr>
+<h2 id="What-is-VBS-and-Why-Does-It-Interfere-with-Virtual-Machines"><a href="#What-is-VBS-and-Why-Does-It-Interfere-with-Virtual-Machines" class="headerlink" title="What is VBS and Why Does It Interfere with Virtual Machines?"></a>What is VBS and Why Does It Interfere with Virtual Machines?</h2><p>VBS (Virtualization-Based Security) is a Windows 11 security feature that creates an isolated security environment using the Hyper-V virtualization layer (Microsoft, 2025c, “Virtualization-based security (VBS)”). While this sounds beneficial, there’s a problem:</p>
+<ul>
+<li><strong>VBS uses the Hyper-V virtualization layer</strong>, which changes how hardware virtualization features (AMD-V or Intel VT-x) are exposed</li>
+<li>Third-party virtualization software like VMware typically needs direct access to these hardware features</li>
+<li>When VBS&#x2F;Hyper-V is running, VMware may be forced into a compatibility mode (WHP), or it may fail to start depending on configuration</li>
+</ul>
+<p>In simple terms: <strong>VBS can block or limit VMware’s access to hardware virtualization unless you use a supported compatibility mode</strong>.</p>
+<hr>
+<h2 id="The-24H2-Change-Windows-Hello-and-VBS-Observed-Behavior"><a href="#The-24H2-Change-Windows-Hello-and-VBS-Observed-Behavior" class="headerlink" title="The 24H2 Change: Windows Hello and VBS (Observed Behavior)"></a>The 24H2 Change: Windows Hello and VBS (Observed Behavior)</h2><p>Starting with Windows 11 24H2, I observed that <strong>Windows Hello-related components can keep VBS enabled</strong> on my system. This is based on personal testing and is not an official Microsoft statement.</p>
+<p><strong>Note (personal testing, not an official statement)</strong>: On my 24H2 system, even after disabling VBS using traditional methods, VBS would re-enable after reboot unless I also disabled the Windows Hello-related registry switch described in Step 5.3. Your results may vary depending on device, edition, and policy settings.</p>
+<p>This is why some users found that (Cumar, 2024, “VBS is not disabled on Windows 11, version 24H2, OS Build 26100.2161”):</p>
+<ul>
+<li>Turned off Memory Integrity ✅</li>
+<li>Ran <code>bcdedit</code> commands ✅</li>
+<li>Modified registry settings ✅</li>
+<li>After reboot, <strong>VBS still shows “Running”</strong> ❌</li>
+</ul>
+<hr>
+<h2 id="Complete-Disabling-Steps-For-24H2"><a href="#Complete-Disabling-Steps-For-24H2" class="headerlink" title="Complete Disabling Steps (For 24H2)"></a>Complete Disabling Steps (For 24H2)</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><ul>
+<li>Windows 11 (any edition: Home&#x2F;Pro&#x2F;Enterprise)</li>
+<li>Administrator privileges</li>
+<li>Virtualization enabled in BIOS (AMD-V or Intel VT-x)</li>
+</ul>
+<hr>
+<h3 id="Step-1-Check-Current-VBS-Status"><a href="#Step-1-Check-Current-VBS-Status" class="headerlink" title="Step 1: Check Current VBS Status"></a>Step 1: Check Current VBS Status</h3><ol>
+<li>Press <code>Win + R</code>, type <code>msinfo32</code>, press Enter (Microsoft, 2025a, “Configure Credential Guard”)</li>
+<li>In the System Information window, scroll down</li>
+<li>Find the <strong>“Virtualization-based security”</strong> row<ul>
+<li>If it shows <strong>“Running”</strong> → needs to be disabled</li>
+<li>If it shows <strong>“Not enabled”</strong> → no action needed</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="Step-2-Disable-Tamper-Protection"><a href="#Step-2-Disable-Tamper-Protection" class="headerlink" title="Step 2: Disable Tamper Protection"></a>Step 2: Disable Tamper Protection</h3><ol>
+<li>Open <strong>Settings</strong> (Win + I)</li>
+<li>Go to <strong>Privacy &amp; security</strong> → <strong>Windows Security</strong></li>
+<li>Click <strong>Virus &amp; threat protection</strong></li>
+<li>Click <strong>Manage settings</strong></li>
+<li>Toggle <strong>Tamper Protection</strong> to <strong>Off</strong></li>
+</ol>
+<hr>
+<h3 id="Step-3-Disable-Memory-Integrity"><a href="#Step-3-Disable-Memory-Integrity" class="headerlink" title="Step 3: Disable Memory Integrity"></a>Step 3: Disable Memory Integrity</h3><ol>
+<li>Open <strong>Settings</strong> (Win + I)</li>
+<li>Go to <strong>Privacy &amp; security</strong> → <strong>Windows Security</strong></li>
+<li>Click <strong>Device security</strong></li>
+<li>Click <strong>Core isolation details</strong></li>
+<li>Toggle <strong>Memory integrity</strong> to <strong>Off</strong></li>
+</ol>
+<hr>
+<h3 id="Step-4-Disable-Hyper-V-Related-Features"><a href="#Step-4-Disable-Hyper-V-Related-Features" class="headerlink" title="Step 4: Disable Hyper-V Related Features"></a>Step 4: Disable Hyper-V Related Features</h3><blockquote>
+<p>If you want VMware to run in WHP compatibility mode (with VBS&#x2F;Hyper-V enabled), <strong>do not</strong> disable <code>HypervisorPlatform</code> and <code>VirtualMachinePlatform</code> (Zongmin, 2020, “VMware Workstation 15.5 now supports Host Hyper-V mode”).<br>The commands below are for fully disabling Hyper-V&#x2F;VBS to maximize performance.</p>
+</blockquote>
+<p>Open Command Prompt as administrator (search for <code>cmd</code>, right-click and select <strong>Run as administrator</strong>), then run these commands sequentially:</p>
+<pre class="line-numbers language-cmd" data-language="cmd"><code class="language-cmd">bcdedit &#x2F;set hypervisorlaunchtype off
+dism &#x2F;online &#x2F;Disable-Feature &#x2F;FeatureName:Microsoft-Hyper-V-All &#x2F;NoRestart
+dism &#x2F;online &#x2F;Disable-Feature &#x2F;FeatureName:HypervisorPlatform &#x2F;NoRestart
+dism &#x2F;online &#x2F;Disable-Feature &#x2F;FeatureName:VirtualMachinePlatform &#x2F;NoRestart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p><strong>Policy note</strong>: If VBS or Credential Guard is enforced via Group Policy or MDM, local registry toggles may be overridden. In that case, disable it in policy (DeviceGuard&#x2F;VirtualizationBasedSecurity) first (Microsoft, 2025b, “Policy CSP - DeviceGuard”).</p>
+</blockquote>
+<hr>
+<h3 id="Step-5-Modify-Registry-Critical"><a href="#Step-5-Modify-Registry-Critical" class="headerlink" title="Step 5: Modify Registry (Critical!)"></a>Step 5: Modify Registry (Critical!)</h3><p>⚠️ <strong>This step was crucial in my 24H2 testing</strong></p>
+<h4 id="5-1-Disable-VBS-Main-Switch"><a href="#5-1-Disable-VBS-Main-Switch" class="headerlink" title="5.1 Disable VBS Main Switch"></a>5.1 Disable VBS Main Switch</h4><ol>
+<li>Press <code>Win + R</code>, type <code>regedit</code>, press Enter</li>
+<li>Navigate to:<pre class="line-numbers language-none"><code class="language-none">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>Find or create <strong>EnableVirtualizationBasedSecurity</strong> (DWORD 32-bit value)</li>
+<li>Double-click and set the value to <strong>0</strong></li>
+</ol>
+<h4 id="5-2-Disable-Credential-Guard-if-exists"><a href="#5-2-Disable-Credential-Guard-if-exists" class="headerlink" title="5.2 Disable Credential Guard (if exists)"></a>5.2 Disable Credential Guard (if exists)</h4><p>Continue in the registry and navigate to:</p>
+<pre class="line-numbers language-none"><code class="language-none">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>If an <strong>Enabled</strong> key exists, set its value to <strong>0</strong></p>
+<h4 id="5-3-🔥-Disable-Windows-Hello-VBS-Dependency-personal-testing"><a href="#5-3-🔥-Disable-Windows-Hello-VBS-Dependency-personal-testing" class="headerlink" title="5.3 🔥 Disable Windows Hello VBS Dependency (personal testing)"></a>5.3 🔥 Disable Windows Hello VBS Dependency (personal testing)</h4><p><strong>This step is based on personal testing and is not an official Microsoft requirement.</strong></p>
+<p>Navigate to:</p>
+<pre class="line-numbers language-none"><code class="language-none">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\WindowsHello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Find <strong>Enabled</strong> (DWORD 32-bit value) and set its value to <strong>0</strong></p>
+<p><strong>Important Notes (personal testing)</strong>:</p>
+<ul>
+<li>On my system, Windows Hello (including PIN login) still worked after this change</li>
+<li>Windows Hello no longer used VBS as its security backend (based on observed VBS state)</li>
+<li>Your experience may differ, especially in managed&#x2F;enterprise environments or Hello for Business setups</li>
+</ul>
+<hr>
+<h3 id="Step-6-Restart-Your-Computer"><a href="#Step-6-Restart-Your-Computer" class="headerlink" title="Step 6: Restart Your Computer"></a>Step 6: Restart Your Computer</h3><p>Close Registry Editor and restart your computer.</p>
+<hr>
+<h3 id="Step-7-Verify-Results"><a href="#Step-7-Verify-Results" class="headerlink" title="Step 7: Verify Results"></a>Step 7: Verify Results</h3><p>After reboot:</p>
+<ol>
+<li>Press <code>Win + R</code>, type <code>msinfo32</code>, press Enter</li>
+<li>Check if <strong>“Virtualization-based security”</strong> shows <strong>“Not enabled”</strong></li>
+<li>Open VMware Workstation and try starting a virtual machine</li>
+<li>The “AMD-V&#x2F;VT-x not supported” error should typically no longer appear</li>
+</ol>
+<hr>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="Q1-Why-does-VBS-automatically-re-enable-after-reboot"><a href="#Q1-Why-does-VBS-automatically-re-enable-after-reboot" class="headerlink" title="Q1: Why does VBS automatically re-enable after reboot?"></a>Q1: Why does VBS automatically re-enable after reboot?</h3><p><strong>A</strong>: <strong>(Personal testing)</strong> Most likely because the Windows Hello registry switch was still enabled. On my 24H2 system, disabling it stopped VBS from re-enabling after reboot:</p>
+<pre class="line-numbers language-none"><code class="language-none">HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\WindowsHello\Enabled &#x3D; 0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Q2-Can-I-still-use-Windows-Hello-and-PIN-login-after-disabling"><a href="#Q2-Can-I-still-use-Windows-Hello-and-PIN-login-after-disabling" class="headerlink" title="Q2: Can I still use Windows Hello and PIN login after disabling?"></a>Q2: Can I still use Windows Hello and PIN login after disabling?</h3><p><strong>A</strong>: <strong>(Personal testing)</strong> Yes on my system. But it may vary by device, Windows edition, and enterprise policies (Hello for Business). Treat it as a best-effort outcome, not a guarantee.</p>
+<h3 id="Q3-Do-I-need-to-disable-virtualization-in-BIOS"><a href="#Q3-Do-I-need-to-disable-virtualization-in-BIOS" class="headerlink" title="Q3: Do I need to disable virtualization in BIOS?"></a>Q3: Do I need to disable virtualization in BIOS?</h3><p><strong>A</strong>: <strong>No! Absolutely not!</strong> Disabling virtualization in BIOS will make VMware completely unable to run. The correct approach is:</p>
+<ul>
+<li>✅ <strong>Enable</strong> virtualization in BIOS (AMD-V or Intel VT-x)</li>
+<li>❌ <strong>Disable</strong> VBS and Hyper-V in Windows</li>
+</ul>
+<h3 id="Q4-What-are-the-security-risks-of-disabling-VBS"><a href="#Q4-What-are-the-security-risks-of-disabling-VBS" class="headerlink" title="Q4: What are the security risks of disabling VBS?"></a>Q4: What are the security risks of disabling VBS?</h3><p><strong>A</strong>: VBS provides an additional security protection layer. After disabling:</p>
+<ul>
+<li>Some advanced security features will be disabled (like Credential Guard)</li>
+<li>Malware protection capabilities will be slightly reduced</li>
+<li>The real-world impact varies by usage, threat model, and environment</li>
+</ul>
+<p>If your computer is primarily used for development, virtualization testing, etc., the performance gains from disabling VBS may outweigh the security loss depending on your threat model.</p>
+<h3 id="Q5-What-about-games-like-VALORANT-that-require-VBS"><a href="#Q5-What-about-games-like-VALORANT-that-require-VBS" class="headerlink" title="Q5: What about games (like VALORANT) that require VBS?"></a>Q5: What about games (like VALORANT) that require VBS?</h3><p><strong>A</strong>: Some games’ anti-cheat systems (like Riot Vanguard) do rely on VBS. You need to choose between:</p>
+<ul>
+<li>Enable VBS → Can play these games, but VMware may need WHP compatibility mode and could be limited</li>
+<li>Disable VBS → VMware works with full performance, but these games may not run</li>
+</ul>
+<p>There’s no perfect solution unless you use dual-boot.</p>
+<h3 id="Q6-I-have-Windows-11-Home-which-doesn’t-have-Group-Policy-Editor-What-should-I-do"><a href="#Q6-I-have-Windows-11-Home-which-doesn’t-have-Group-Policy-Editor-What-should-I-do" class="headerlink" title="Q6: I have Windows 11 Home, which doesn’t have Group Policy Editor. What should I do?"></a>Q6: I have Windows 11 Home, which doesn’t have Group Policy Editor. What should I do?</h3><p><strong>A</strong>: No problem. This tutorial’s methods are entirely based on command line and registry - no Group Policy Editor needed. Home edition works fine.</p>
+<hr>
+<h2 id="Compatibility-Note-VMware-with-Hyper-V-x2F-VBS-Enabled"><a href="#Compatibility-Note-VMware-with-Hyper-V-x2F-VBS-Enabled" class="headerlink" title="Compatibility Note: VMware with Hyper-V&#x2F;VBS Enabled"></a>Compatibility Note: VMware with Hyper-V&#x2F;VBS Enabled</h2><p>If you prefer to keep VBS&#x2F;Hyper-V on, VMware Workstation can still run using Windows Hypervisor Platform (WHP) compatibility mode. This typically has performance or feature limitations compared to direct hardware virtualization (Zongmin, 2020, “VMware Workstation 15.5 now supports Host Hyper-V mode”). The steps in this article focus on <strong>maximizing VMware performance</strong> by <strong>fully disabling VBS&#x2F;Hyper-V</strong> instead of using WHP.</p>
+<hr>
+<h2 id="Registry-Modification-Summary-Quick-Reference"><a href="#Registry-Modification-Summary-Quick-Reference" class="headerlink" title="Registry Modification Summary (Quick Reference)"></a>Registry Modification Summary (Quick Reference)</h2><p>If you want to directly see the registry locations that need modification, here’s the complete list:</p>
+<table>
+<thead>
+<tr>
+<th>Registry Path</th>
+<th>Key Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard</code></td>
+<td><code>EnableVirtualizationBasedSecurity</code></td>
+<td><code>0</code></td>
+<td>Disable VBS main switch</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\CredentialGuard</code></td>
+<td><code>Enabled</code></td>
+<td><code>0</code></td>
+<td>Disable Credential Guard</td>
+</tr>
+<tr>
+<td><code>HKEY_LOCAL_MACHINE\...\DeviceGuard\Scenarios\WindowsHello</code></td>
+<td><code>Enabled</code></td>
+<td><code>0</code></td>
+<td><strong>Windows Hello VBS switch (observed on my system, not official)</strong></td>
+</tr>
+</tbody></table>
+<p>All value types are <strong>DWORD (32-bit) Value</strong>.</p>
+<hr>
+<h2 id="Understanding-the-24H2-Documentation-Gap"><a href="#Understanding-the-24H2-Documentation-Gap" class="headerlink" title="Understanding the 24H2 Documentation Gap"></a>Understanding the 24H2 Documentation Gap</h2><p>The Windows Hello-related VBS behavior I observed on 24H2 may represent an undocumented change or a device&#x2F;policy-specific interaction. The specific registry setting (<code>DeviceGuard\Scenarios\WindowsHello</code>) is not prominently mentioned in mainstream documentation, which can confuse users following traditional VBS disabling methods (Microsoft, 2025c, “Virtualization-based security (VBS)”; Cumar, 2024, “VBS is not disabled on Windows 11, version 24H2, OS Build 26100.2161”).</p>
+<p>Community forums and discussions (such as Microsoft Q&amp;A) have been helpful in identifying possible workarounds. This tutorial consolidates those findings and personal testing to provide a more complete path for systems where VBS re-enables after reboot (Cumar, 2024, “VBS is not disabled on Windows 11, version 24H2, OS Build 26100.2161”).</p>
+<hr>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>The VBS disabling process in Windows 11 24H2 is more complex than before, but with the correct steps, it can usually be disabled (Cumar, 2024, “VBS is not disabled on Windows 11, version 24H2, OS Build 26100.2161”).</p>
+<p><strong>Key Points Summary</strong>:</p>
+<ol>
+<li>BIOS virtualization must <strong>remain enabled</strong> ✅</li>
+<li>Windows VBS should be <strong>disabled</strong> for maximum VMware performance ❌</li>
+<li>You <strong>may need to disable the Windows Hello VBS switch</strong> (personal testing) ❌</li>
+<li>Verify results after reboot</li>
+</ol>
+<p>If you have any questions, feel free to discuss in the comments. Happy virtualizing!</p>
+<hr>
+<p><strong>References</strong>:</p>
+<ul>
+<li>Cumar, E. (2024, October 31). VBS is not disabled on Windows 11, version 24H2, OS Build 26100.2161 [Online forum post]. Microsoft Q&amp;A. <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/answers/questions/2113711/vbs-is-not-disabled-on-windows-11-version-24h2-os">https://learn.microsoft.com/en-us/answers/questions/2113711/vbs-is-not-disabled-on-windows-11-version-24h2-os</a></li>
+<li>Microsoft. (2025a, November 5). Configure Credential Guard [Documentation]. Microsoft Learn. <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/configure">https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/configure</a></li>
+<li>Microsoft. (2025b, September 2). Policy CSP - DeviceGuard [Documentation]. Microsoft Learn. <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-deviceguard">https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-deviceguard</a></li>
+<li>Microsoft. (2025c, February 27). Virtualization-based security (VBS) [Documentation]. Microsoft Learn. <a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs">https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/oem-vbs</a></li>
+<li>Zongmin. (2020, May 28). VMware Workstation 15.5 now supports Host Hyper-V mode [Blog post]. VMware Cloud Foundation (VCF) Blog. <a target="_blank" rel="noopener" href="https://blogs.vmware.com/cloud-foundation/2020/05/28/vmware-workstation-now-supports-hyper-v-mode/">https://blogs.vmware.com/cloud-foundation/2020/05/28/vmware-workstation-now-supports-hyper-v-mode/</a></li>
+</ul>
+
+	
+	</div>
+  <a type="button" href="/devops/disable-vbs-on-windows-11-24h2.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html" >How to enable mouse side buttons on a VMware VM</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2023-02-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Close the VM.<br>Edit the .vmx file and add this config:  </p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf">mouse.vusb.enable &#x3D; &quot;TRUE&quot;
+mouse.vusb.useBasicMouse &#x3D; &quot;FALSE&quot;
+usb.generic.allowHID &#x3D; &quot;TRUE&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>Save the .vmx file.<br>Start the VM and you can see that you can use the mouse side buttons to move forward and backward on the web page.</p>
+
+	
+	</div>
+  <a type="button" href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html" >Remove News Widgets of Windows 11 to Improve Performance</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-11-12  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Widgets are a new feature introduced by Microsoft in Windows 11.<br>Currently, the news and interest modules that are enabled by default in widgets provide various kinds of information.</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">winget uninstall MicrosoftWindows<span class="token punctuation">.</span>Client<span class="token punctuation">.</span>WebExperience_cw5n1h2txyewy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>This removes the Widgets experience. It may reduce background resource usage, but performance impact varies by device and workload.</p>
+
+	
+	</div>
+  <a type="button" href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/privacy/personal-note-editing-software-research.html" >Personal note editing software research</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-10-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="Personal-note-editing-needs"><a href="#Personal-note-editing-needs" class="headerlink" title="Personal note editing needs"></a>Personal note editing needs</h2><h3 id="Core-requirements"><a href="#Core-requirements" class="headerlink" title="Core requirements:"></a>Core requirements:</h3><ul>
+<li>Edit and save content in markdown format, which makes the format simple, easy to use, open, and easy to migrate</li>
+<li>Support WYSIWYG mode when editing, similar to Typora</li>
+<li>Open source, thus keeping content safe and free</li>
+<li>Support offline use, data can be stored locally, or stored in third-party channels such as Google Drive, Github repository</li>
+<li>Support direct copying of pictures and text on web pages and paste them directly</li>
+<li>Open the folder and display the file directory structure, which is convenient for placing and organizing notes according to the file directory from the sidebar</li>
+<li>Supports the creation of internal links between markdown files, which can be easily jumped</li>
+<li>Supports relationship graphs showing internal links in documents</li>
+</ul>
+<h3 id="Optional-Requirements"><a href="#Optional-Requirements" class="headerlink" title="Optional Requirements"></a>Optional Requirements</h3><ul>
+<li>Supports loading plugins to extend functionality</li>
+<li>Open the online version editor directly from the web browser, call the file API to open the local folder for editing, therefore even chromebook can use it</li>
+</ul>
+<h2 id="Software-solutions"><a href="#Software-solutions" class="headerlink" title="Software solutions"></a>Software solutions</h2><blockquote>
+<p>Note: The evaluations below reflect my personal testing and observations <strong>as of 2022-10-15</strong>. Product features and maintenance status may have changed since then.</p>
+</blockquote>
+<ul>
+<li>✅<strong>Logseq</strong> : Not perfect, but currently the most recommended</li>
+<li>Advantages:<ul>
+<li>Open source, most functions are as easy to use as Obsidian, such as beautiful appearance, local data storage, support for bidirectional links and relationship graphs</li>
+<li>There is a web version, you can directly open the local folder</li>
+</ul>
+</li>
+<li>Shortcomings:<ul>
+<li>The directory structure browsing is not supported, and all the notes are mixed together and it is not easy to classify. Solution: If you find a way to write a “navigation document”, similar to the Yellow Pages, and then bookmark it, and add a link to the Yellow Pages every time you add a sub-document, it may also be a convenient way to find files by category. This is still not convenient like a directory, but it can be adapted.</li>
+<li>At the time, the md standard checkbox rendering was not supported.</li>
+</ul>
+</li>
+<li>❗<strong>Notion</strong>: It is basically free and easy to use, but at the time there was no offline mode that met my needs, and local storage&#x2F;own-sync workflows were not supported. That introduces privacy concerns for my use case. However, it supports real-time collaboration and can be used on projects, but is not suitable for storing personal core data.</li>
+<li>❗<strong>Obsidian</strong>: It is completely free, easy to use, and supports all requirements except open source, but it is not open source. There is currently no better option for personal use.</li>
+<li>❗<strong>VSCode+Office Viewer plugin</strong> (based on vditor): open source, md editing function is very powerful, and there is a toolbar. But bidirectional links and relational graphs are not supported. It can be said to be a good md editor, but not a very good note editor. And this plugin does not support running in the VSCode web.</li>
+</ul>
+	
+	</div>
+  <a type="button" href="/privacy/personal-note-editing-software-research.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/copy_and_paste_content_to_markdown.html" >Copy and paste content to markdown</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-08-06  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Today I wanted to practice on LeetCode, and then I opened <a target="_blank" rel="noopener" href="https://github.com/phodal/2md">https://github.com/phodal/2md</a> to save the problem to local.<br>Because I found that there were some small problems with this tool, I forked a copy and fixed some errors that it would generate when converting the content of the LeetCode problem.<br>In this way, copy the problem of LeetCode and paste it into my 2md, and then copy the converted markdown to save it locally.<br>Repo: <a target="_blank" rel="noopener" href="https://github.com/immortalt/2md">https://github.com/immortalt/2md</a><br>The displayed format is correct, and the effect is much better.<br>The online address of my 2md: <a href="https://immortal-blog.github.io/tomd/">https://immortal-blog.github.io/tomd/</a></p>
+
+	
+	</div>
+  <a type="button" href="/devops/copy_and_paste_content_to_markdown.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html" >How to mount VMware shared folder to Ubuntu on boot</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-06-04  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Sometimes the shared folder function of VMware Workstation may suddenly not work after rebooting.<br>There are several ways to fix it.</p>
+<h2 id="mount-by-a-command"><a href="#mount-by-a-command" class="headerlink" title="mount by a command"></a>mount by a command</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> vmhgfs-fuse .host:/ /mnt/hgfs -o <span class="token assign-left variable">subtype</span><span class="token operator">=</span>vmhgfs,allow_other -o nonempty<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>This command means to mount all host shared folders to <code>/mnt/hgfs</code>, which is the default operation that VMware should have done automatically.<br>However, the folder would disappear after rebooting.</p>
+<h2 id="mount-automatically"><a href="#mount-automatically" class="headerlink" title="mount automatically"></a>mount automatically</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">nano</span> /etc/fstab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>We can edit the <code>fstab</code> file to write the auto-mount configuration. Make sure the mount point exists:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> -p /mnt/hgfs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Then add one line:</p>
+<pre class="line-numbers language-none"><code class="language-none">.host:&#x2F; &#x2F;mnt&#x2F;hgfs fuse.vmhgfs-fuse allow_other,defaults 0 0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/idea/practical-advice-for-python3-algorithm-practice.html" >Practical advice for python3 algorithm practice</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-21  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="When-dividing-be-careful-with-large-numbers"><a href="#When-dividing-be-careful-with-large-numbers" class="headerlink" title="When dividing, be careful with large numbers"></a>When dividing, be careful with large numbers</h2><p>Sample: they should be different, but due to the float format, they become the same.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">500000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">499999999</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">500000000</span> <span class="token operator">-</span> <span class="token number">1000000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">499999999</span> <span class="token operator">-</span> <span class="token number">999999998</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> a <span class="token operator">==</span> b<span class="token punctuation">)</span>
+<span class="token comment"># 1.000000002 1.000000002 True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In this situation, we can just simply use Decimal.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> decimal <span class="token keyword">import</span> Decimal
+a <span class="token operator">=</span> Decimal<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">500000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> Decimal<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">499999999</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> Decimal<span class="token punctuation">(</span><span class="token number">500000000</span> <span class="token operator">-</span> <span class="token number">1000000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> Decimal<span class="token punctuation">(</span><span class="token number">499999999</span> <span class="token operator">-</span> <span class="token number">999999998</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> a <span class="token operator">==</span> b<span class="token punctuation">)</span>
+<span class="token comment"># 1.000000002000000008000000032 1.000000002000000004000000008 False</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	
+	</div>
+  <a type="button" href="/idea/practical-advice-for-python3-algorithm-practice.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html" >How to run VMware 16.2.3 on Ubuntu 22.04</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>Currently (2022-05-16), VMware Workstation 16.2.3 installs on Ubuntu Desktop 22.04 LTS, but the kernel modules fail to build, so it won’t run.<br>You can install it and see the icon, but when you try to open it, it will ask you to install some modules and then fail.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>Here is a script that I verified can solve the problem.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone https://github.com/mkubecek/vmware-host-modules
+<span class="token builtin class-name">cd</span> vmware-host-modules
+<span class="token function">git</span> checkout workstation-16.2.3
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token punctuation">;</span> <span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token function">sudo</span> modprobe -a vmw_vmci vmmon vmnet<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Then you may need to reboot the host system to make VM networks working.</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Although Ubuntu 22.04 is a LTS version, I ran into compatibility issues around this time. My short-term advice then was to use Ubuntu 20.04.</p>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-12">
+		<h3 class="title">
+			<a href="/devops/how-to-enable-font-ligatures-in-vscode.html" >How to enable font ligatures in VS Code</a>
+		</h3>
+		</div>
+	<div class="col-md-12">
+		<div class="date">post @ 2022-05-09  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h2 id="What-are-font-ligatures"><a href="#What-are-font-ligatures" class="headerlink" title="What are font ligatures?"></a>What are font ligatures?</h2><p><img src="https://user-images.githubusercontent.com/76415903/167493317-ee5c86e9-297f-4ebe-a9c4-8580216401ce.png" alt="image"><br>It’s an interesting feature in fonts like JetBrains Mono.</p>
+<h2 id="I-have-enabled-JetBrains-Mono-but-why-not-see-font-ligatures"><a href="#I-have-enabled-JetBrains-Mono-but-why-not-see-font-ligatures" class="headerlink" title="I have enabled JetBrains Mono, but why not see font ligatures?"></a>I have enabled JetBrains Mono, but why not see font ligatures?</h2><p>I think VSCode or Word disables this feature by default, and we need to change font options to enable this feature.</p>
+<h2 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h2><p>Open “Menu”-“Setting”, open “setting.json”, and change this option:</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;editor.fontLigatures&quot;: true<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+	
+	</div>
+  <a type="button" href="/devops/how-to-enable-font-ligatures-in-vscode.html#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+
+		</div>
+
+		<!-- pagination -->
+		<div>
+  		<center>
+		<div class="pagination">
+
+   
+    
+           <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+        
+
+        <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+ 
+       <a href="/page/2/" type="button" class="btn btn-default ">Next<i class="fa fa-arrow-circle-o-right"></i></a>     
+        
+
+  
+</div>
+
+  		</center>
+		</div>
+
+		
+		
+	</div> <!-- col-md-9 -->
+
+	
+		<div class="col-md-3">
+	<div id="sidebar">
+	
+			
+  <div id="site_search">
+   <div class="form-group">
+    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
+   </div>  
+  <div id="local-search-result"></div>
+  </div>
+
+
+		
+			
+	<div class="widget">
+		<h4>Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/devops/">devops<span>13</span></a></li>
+		
+			<li><a href="/categories/frontend/">frontend<span>1</span></a></li>
+		
+			<li><a href="/categories/git/">git<span>1</span></a></li>
+		
+			<li><a href="/categories/golang/">golang<span>2</span></a></li>
+		
+			<li><a href="/categories/idea/">idea<span>3</span></a></li>
+		
+			<li><a href="/categories/privacy/">privacy<span>2</span></a></li>
+		
+		</ul>
+	</div>
+
+		
+			
+	<div class="widget">
+		<h4>Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/golang/">golang<span>2</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>7</span></a></li>
+		
+			<li><a href="/tags/macOS/">macOS<span>1</span></a></li>
+		
+			<li><a href="/tags/frontend/">frontend<span>1</span></a></li>
+		
+			<li><a href="/tags/algorithm/">algorithm<span>1</span></a></li>
+		
+			<li><a href="/tags/devops/">devops<span>12</span></a></li>
+		
+			<li><a href="/tags/security/">security<span>1</span></a></li>
+		
+			<li><a href="/tags/vmware/">vmware<span>1</span></a></li>
+		
+			<li><a href="/tags/virtualization/">virtualization<span>1</span></a></li>
+		
+			<li><a href="/tags/idea/">idea<span>5</span></a></li>
+		
+			<li><a href="/tags/git/">git<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu/">ubuntu<span>7</span></a></li>
+		
+			<li><a href="/tags/Karabiner-Elements/">Karabiner-Elements<span>1</span></a></li>
+		
+			<li><a href="/tags/Keyboard/">Keyboard<span>1</span></a></li>
+		
+			<li><a href="/tags/privacy/">privacy<span>2</span></a></li>
+		
+			<li><a href="/tags/windows/">windows<span>1</span></a></li>
+		
+		 
+		</ul>
+	</div>
+
+
+		
+			
+<div class="widget">
+	<h4>Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li><i class="fa fa-github"></i><a href="http://www.github.com/immortalt" title="My Github account." target="_blank">My Github</a></li>
+	
+	</ul>
+</div>
+
+
+		
+			
+<div class="widget">
+  <h4>Recent Posts</h4>
+  <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/how-to-use-the-keyboard-on-a-mac-like-on-windows.html" ><i class="fa fa-file-o"></i>How to Use the Keyboard on ...</a>
+      </li>
+    
+      <li>
+        <a href="/devops/disable-vbs-on-windows-11-24h2.html" ><i class="fa fa-file-o"></i>The Ultimate Guide to Disab...</a>
+      </li>
+    
+      <li>
+        <a href="/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html" ><i class="fa fa-file-o"></i>How to enable mouse side bu...</a>
+      </li>
+    
+      <li>
+        <a href="/devops/remove-news-widgets-of-windows-11-to-improve-performance.html" ><i class="fa fa-file-o"></i>Remove News Widgets of Wind...</a>
+      </li>
+    
+      <li>
+        <a href="/privacy/personal-note-editing-software-research.html" ><i class="fa fa-file-o"></i>Personal note editing softw...</a>
+      </li>
+    
+  </ul>
+</div>
+
+		
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
+
+	
+	
+</div> <!-- row-fluid -->
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2026 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.
+     <br> Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

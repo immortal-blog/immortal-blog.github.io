@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Practical advice for python3 algorithm practice | Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Practical advice for python3 algorithm practice"/>
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism-line-numbers.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link id="modern-theme-css" rel="stylesheet" href="/css/modern-improvements.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/theme-switcher.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		  <li>
+			<a href="#" id="theme-toggle-btn" title="Switch between modern and retro themes">
+			  <i class="fa fa-refresh"></i>Retro Theme
+			</a>
+		  </li>
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Practical advice for python3 algorithm practice</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="When-dividing-be-careful-with-large-numbers"><a href="#When-dividing-be-careful-with-large-numbers" class="headerlink" title="When dividing, be careful with large numbers"></a>When dividing, be careful with large numbers</h2><p>Sample: they should be different, but due to the float format, they become the same.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">a <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">500000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">499999999</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">500000000</span> <span class="token operator">-</span> <span class="token number">1000000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">499999999</span> <span class="token operator">-</span> <span class="token number">999999998</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> a <span class="token operator">==</span> b<span class="token punctuation">)</span>
+<span class="token comment"># 1.000000002 1.000000002 True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>In this situation, we can just simply use Decimal.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> decimal <span class="token keyword">import</span> Decimal
+a <span class="token operator">=</span> Decimal<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">500000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> Decimal<span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">-</span> <span class="token number">499999999</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> Decimal<span class="token punctuation">(</span><span class="token number">500000000</span> <span class="token operator">-</span> <span class="token number">1000000000</span><span class="token punctuation">)</span> <span class="token operator">/</span> Decimal<span class="token punctuation">(</span><span class="token number">499999999</span> <span class="token operator">-</span> <span class="token number">999999998</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> a <span class="token operator">==</span> b<span class="token punctuation">)</span>
+<span class="token comment"># 1.000000002000000008000000032 1.000000002000000004000000008 False</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span id="more"></span>
+<h2 id="How-to-create-a-matrix"><a href="#How-to-create-a-matrix" class="headerlink" title="How to create a matrix"></a>How to create a matrix</h2><h3 id="Wrong-method"><a href="#Wrong-method" class="headerlink" title="Wrong method"></a>Wrong method</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Wrong method (shallow copy)</span>
+list_two <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>list_two<span class="token punctuation">)</span>
+<span class="token comment"># [[0, 0, 0], [0, 0, 0], [0, 0, 0]]</span>
+list_two<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>list_two<span class="token punctuation">)</span>
+<span class="token comment"># [[0, 2, 0], [0, 2, 0], [0, 2, 0]]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Correct-Method"><a href="#Correct-Method" class="headerlink" title="Correct Method"></a>Correct Method</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># Correct method (deep copy)</span>
+list_three <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token keyword">for</span> j <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>list_three<span class="token punctuation">)</span>
+<span class="token comment"># [[0, 0, 0], [0, 0, 0], [0, 0, 0]]</span>
+list_three<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>list_three<span class="token punctuation">)</span>
+<span class="token comment"># [[0, 0, 0], [0, 3, 0], [0, 0, 0]]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Useful-tool-classes-in-python3"><a href="#Useful-tool-classes-in-python3" class="headerlink" title="Useful tool classes in python3"></a>Useful tool classes in python3</h2><h3 id="defaultdict"><a href="#defaultdict" class="headerlink" title="defaultdict"></a>defaultdict</h3><p>A dict that has default value.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+a <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span>
+b <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token keyword">lambda</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+c <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token keyword">lambda</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token comment"># b[0]: []</span>
+<span class="token comment"># c[0]: 0</span>
+<span class="token comment"># c[1] += 1  =>  c[1] == 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Counter"><a href="#Counter" class="headerlink" title="Counter"></a>Counter</h3><p>A dict to auto-count items.</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> collections <span class="token keyword">import</span> Counter
+a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+b <span class="token operator">=</span> Counter<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+<span class="token comment"># b: Counter(&#123;3: 2, 1: 1, 2: 1&#125;)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="More-efficient-way-to-code"><a href="#More-efficient-way-to-code" class="headerlink" title="More efficient way to code"></a>More efficient way to code</h2><h3 id="for-loop-with-value-and-index"><a href="#for-loop-with-value-and-index" class="headerlink" title="for loop with value and index"></a>for loop with value and index</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># first way</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    pair <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> items<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># second way: more efficient</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> v <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    pair <span class="token operator">=</span> <span class="token punctuation">(</span>i<span class="token punctuation">,</span> v<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="don’t-use-len-in-for-loop"><a href="#don’t-use-len-in-for-loop" class="headerlink" title="don’t use len() in for loop"></a>don’t use len() in for loop</h3><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># first way</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>items<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment"># second way: more efficient</span>
+n <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>items<span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>items<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="cache-function-value"><a href="#cache-function-value" class="headerlink" title="cache function value"></a>cache function value</h2><p>@functools.cache(user_function)<br>Simple lightweight unbounded function cache. Sometimes called “memoize”.<br>Returns the same as lru_cache(maxsize&#x3D;None), creating a thin wrapper around a dictionary lookup for the function arguments. Because it never needs to evict old values, this is smaller and faster than lru_cache() with a size limit.<br>For example:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> functools <span class="token keyword">import</span> cache
+
+<span class="token decorator annotation punctuation">@cache</span>
+<span class="token keyword">def</span> <span class="token function">factorial</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> n <span class="token operator">*</span> factorial<span class="token punctuation">(</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> n <span class="token keyword">else</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+	  
+	  <hr>
+	  <p>Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+    <section id="comment">
+      <h2 class="title">Comments</h2>
+      
+         <script>
+           // Determine theme based on user preference
+           const savedTheme = localStorage.getItem('hexo-theme-preference') || 'modern';
+           const utterancesTheme = savedTheme === 'modern'
+             ? 'github-light'
+             : 'photon-dark';
+
+           // Create and configure utterances script
+           const utterancesScript = document.createElement('script');
+           utterancesScript.src = 'https://utteranc.es/client.js';
+           utterancesScript.setAttribute('repo', 'immortal-blog/immortal-blog.github.io');
+           utterancesScript.setAttribute('issue-term', 'pathname');
+           utterancesScript.setAttribute('theme', utterancesTheme);
+           utterancesScript.setAttribute('crossorigin', 'anonymous');
+           utterancesScript.async = true;
+
+           document.getElementById('comment').appendChild(utterancesScript);
+         </script>
+      
+    </section>
+    
+    
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2022-05-21 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/idea/">idea<span>3</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/idea/">idea<span>5</span></a></li> <li><a href="/tags/algorithm/">algorithm<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#When-dividing-be-careful-with-large-numbers"><span class="toc-article-text">When dividing, be careful with large numbers</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#How-to-create-a-matrix"><span class="toc-article-text">How to create a matrix</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Wrong-method"><span class="toc-article-text">Wrong method</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Correct-Method"><span class="toc-article-text">Correct Method</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Useful-tool-classes-in-python3"><span class="toc-article-text">Useful tool classes in python3</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#defaultdict"><span class="toc-article-text">defaultdict</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Counter"><span class="toc-article-text">Counter</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#More-efficient-way-to-code"><span class="toc-article-text">More efficient way to code</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#for-loop-with-value-and-index"><span class="toc-article-text">for loop with value and index</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#don%E2%80%99t-use-len-in-for-loop"><span class="toc-article-text">don’t use len() in for loop</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#cache-function-value"><span class="toc-article-text">cache function value</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2026 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.
+     <br> Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>

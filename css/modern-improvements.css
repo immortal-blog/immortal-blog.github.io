@@ -1,0 +1,740 @@
+/* ========================================
+   Modern GitHub-Style Improvements
+   Only modify colors, fonts and spacing, preserve original layout
+   ======================================== */
+
+/* ===== Global Font Replacement - Remove Retro Fonts ===== */
+body,
+.page,
+.post,
+h1, h2, h3, h4, h5, h6,
+blockquote p,
+blockquote ol,
+blockquote ul,
+blockquote li,
+.slogan,
+a.label-anchor,
+.page h3.title,
+.navbar-brand,
+pre,
+code {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* Code-specific monospace font */
+pre,
+code {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace !important;
+}
+
+/* ===== Color Scheme Optimization - GitHub Style ===== */
+
+/* Background color */
+body {
+  background-color: #ffffff !important;
+}
+
+/* Text color */
+body,
+.post,
+.page,
+p,
+li,
+td {
+  color: #24292e !important;
+}
+
+/* Heading color */
+h1, h2, h3, h4, h5, h6 {
+  color: #1a1a1a !important;
+}
+
+/* Link color - GitHub blue */
+a {
+  color: #0366d6 !important;
+  background: transparent !important;
+}
+
+a:hover {
+  color: #0366d6 !important;
+  background: transparent !important;
+  text-decoration: underline !important;
+}
+
+a:active,
+a:focus {
+  color: #0366d6 !important;
+  background: transparent !important;
+}
+
+/* Meta widget links */
+.meta-widget a {
+  color: #0366d6 !important;
+}
+
+/* ===== Horizontal Rule Optimization ===== */
+hr {
+  border: 0 !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  height: 0 !important;
+  margin: 24px 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-top: 1px solid #e1e4e8 !important;
+  padding: 0 !important;
+}
+
+
+
+/* ===== Blockquote Optimization ===== */
+blockquote {
+  background-color: transparent !important;
+  border-left: 0.25em solid #dfe2e5 !important;
+  color: #6a737d !important;
+}
+
+/* PrismJS code block tuning */
+pre[class*="language-"] {
+  padding: 0.6em 0.9em !important;
+  margin: 0.6em 0 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+
+pre[class*="language-"].line-numbers {
+  padding-left: 3.8em !important;
+}
+
+pre[class*="language-"] > code {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: inherit !important;
+}
+
+/* PrismJS light theme override (modern only) */
+code[class*="language-"],
+pre[class*="language-"] {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  text-shadow: none !important;
+}
+
+:not(pre) > code[class*="language-"] {
+  background: rgba(27, 31, 35, 0.05) !important;
+  color: #24292e !important;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata { color: #6a737d !important; }
+.token.punctuation { color: #24292e !important; }
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted { color: #005cc5 !important; }
+.token.boolean,
+.token.number { color: #005cc5 !important; }
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted { color: #032f62 !important; }
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable { color: #24292e !important; }
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name { color: #6f42c1 !important; }
+.token.keyword { color: #d73a49 !important; }
+.token.regex,
+.token.important { color: #e36209 !important; }
+
+/* ===== Table Optimization ===== */
+table {
+  border-collapse: collapse !important;
+}
+
+table tr {
+  border-top: 1px solid #c6cbd1 !important;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f6f8fa !important;
+}
+
+th {
+  background: #ffffff !important;
+  color: #24292e !important;
+  border: 1px solid #dfe2e5 !important;
+}
+
+td {
+  color: #24292e !important;
+  border: 1px solid #dfe2e5 !important;
+}
+
+/* ===== Search Box Optimization ===== */
+#local-search-input {
+  background-color: #ffffff !important;
+  color: #24292e !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+}
+
+#local-search-input:focus {
+  border-color: #0366d6 !important;
+  outline: 2px solid rgba(3, 102, 214, 0.3) !important;
+  outline-offset: 0 !important;
+}
+
+#local-search-result {
+  background-color: #ffffff !important;
+  border: 1px solid #e1e4e8 !important;
+  border-radius: 6px !important;
+}
+
+p.search-result {
+  color: #24292e !important;
+}
+
+/* ===== Tag Box Optimization ===== */
+.tag_box a {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+}
+
+.tag_box a:hover {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+  border-color: #0366d6 !important;
+}
+
+/* ===== Pagination Optimization ===== */
+.pagination a {
+  color: #0366d6 !important;
+  background: #ffffff !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+}
+
+.pagination a:hover {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+  border-color: #0366d6 !important;
+  text-decoration: none !important;
+}
+
+/* ===== Strong Text Optimization ===== */
+strong {
+  color: #24292e !important;
+}
+
+/* ===== Slogan Optimization ===== */
+.slogan {
+  color: #586069 !important;
+}
+
+/* ===== Date Optimization ===== */
+.date {
+  color: #586069 !important;
+}
+
+.post .date {
+  color: #586069 !important;
+}
+
+/* ===== Footer Optimization ===== */
+footer {
+  background: #ffffff !important;
+  color: #586069 !important;
+  border-top: 1px solid #e1e4e8 !important;
+}
+
+footer p {
+  color: #586069 !important;
+}
+
+footer a {
+  color: #0366d6 !important;
+  background: transparent !important;
+}
+
+footer a:hover {
+  text-decoration: underline !important;
+  background: transparent !important;
+}
+
+/* ===== Sidebar Optimization ===== */
+#sidebar,
+.sidebar {
+  background: #ffffff !important;
+  color: #24292e !important;
+}
+
+#sidebar h4,
+.sidebar h4 {
+  color: #24292e !important;
+  border-bottom: 2px solid #0366d6 !important;
+}
+
+#sidebar a,
+.sidebar a {
+  color: #0366d6 !important;
+  background: transparent !important;
+}
+
+#sidebar a:hover,
+.sidebar a:hover {
+  text-decoration: underline !important;
+  background: transparent !important;
+}
+
+#sidebar li,
+.sidebar li {
+  color: #24292e !important;
+}
+
+/* ===== Category List Optimization ===== */
+.category-list a {
+  background: #f6f8fa !important;
+  color: #24292e !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+}
+
+.category-list a:hover {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+  border-color: #0366d6 !important;
+}
+
+/* ===== Widget Optimization ===== */
+.widget {
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+/* ===== Alert Optimization ===== */
+.alert-success {
+  color: #22863a !important;
+  background: #dcffe4 !important;
+}
+
+/* ===== Spacing Optimization - Reduce Whitespace ===== */
+p {
+  margin-bottom: 16px !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 24px !important;
+  margin-bottom: 16px !important;
+}
+
+h1 {
+  padding-bottom: 0.3em !important;
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+h2 {
+  padding-bottom: 0.3em !important;
+  margin-top: 24px !important;
+  padding-top: 0 !important;
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+ul, ol {
+  margin-bottom: 16px !important;
+}
+
+li {
+  margin-bottom: 0 !important;
+}
+
+/* ===== TOC Optimization ===== */
+.toc {
+  background: #f6f8fa !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+}
+
+.toc .toc-title {
+  color: #24292e !important;
+}
+
+.toc-article a {
+  color: #0366d6 !important;
+}
+
+.toc-article a:hover {
+  text-decoration: underline !important;
+}
+
+/* ===== Listing Item Optimization ===== */
+.listing-item {
+  border-bottom: 1px solid #e1e4e8 !important;
+}
+
+.listing-item a {
+  color: #0366d6 !important;
+}
+
+.listing-item a:hover {
+  text-decoration: underline !important;
+  background: transparent !important;
+}
+
+/* ===== Selection Optimization ===== */
+::selection {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+}
+
+/* ===== Remove Text Shadows ===== */
+* {
+  text-shadow: none !important;
+}
+
+/* ===== Navbar Brand Hover Optimization ===== */
+.navbar-brand:hover {
+  text-decoration: none !important;
+  text-shadow: none !important;
+}
+
+/* ===== Navbar Color Optimization ===== */
+.navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e1e4e8 !important;
+  box-shadow: 0 1px 0 rgba(27,31,35,.04) !important;
+}
+
+.navbar-brand {
+  color: #24292e !important;
+}
+
+.navbar-brand:hover,
+.navbar-brand:focus {
+  color: #0366d6 !important;
+}
+
+.navbar-nav > li > a {
+  color: #24292e !important;
+}
+
+.navbar-nav > li > a:hover,
+.navbar-nav > li > a:focus {
+  color: #0366d6 !important;
+  background-color: transparent !important;
+}
+
+/* ===== Navbar Spacing Optimization ===== */
+.navbar {
+  min-height: 40px !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.navbar-nav {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.navbar-brand,
+.navbar-nav > li > a {
+  line-height: 20px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+body {
+  padding-top: 50px !important;
+}
+
+.content {
+  margin-top: 0 !important;
+}
+
+.page-header {
+  margin-top: 0 !important;
+}
+
+/* ===== Read More & Navigation Buttons Optimization ===== */
+a.btn.btn-default.more,
+a.btn.more,
+a.more.btn-default {
+  background: #ffffff !important;
+  color: #0366d6 !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+  padding: 5px 12px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.1s ease, border-color 0.1s ease !important;
+  margin: 16px 0 0 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.pagination a,
+a[rel="prev"],
+a[rel="next"] {
+  background: #ffffff !important;
+  color: #0366d6 !important;
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: 0 1px 0 rgba(27,31,35,0.04), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+  cursor: pointer !important;
+  transition: background-color 0.1s ease, border-color 0.1s ease !important;
+  margin: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.pagination a i.fa,
+a[rel="prev"] i.fa,
+a[rel="next"] i.fa {
+  margin-right: 6px !important;
+}
+
+.pagination a i.fa-arrow-circle-o-right,
+a[rel="next"] i.fa-arrow-circle-o-right {
+  margin-right: 0 !important;
+  margin-left: 6px !important;
+}
+
+a.btn.btn-default.more:before,
+a.btn.btn-default.more:after,
+a.btn.more:before,
+a.btn.more:after,
+a.more.btn-default:before,
+a.more.btn-default:after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+a.btn.btn-default.more:hover,
+a.btn.more:hover,
+a.more.btn-default:hover {
+  background: #f6f8fa !important;
+  color: #0366d6 !important;
+  border-color: #0366d6 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+a.btn.btn-default.more:active,
+a.btn.more:active,
+a.more.btn-default:active {
+  background: #edeff2 !important;
+  color: #0366d6 !important;
+  box-shadow: none !important;
+  border: 1px solid #0366d6 !important;
+  border-color: #0366d6 !important;
+  transform: none !important;
+  margin: 16px 0 0 0 !important;
+  outline: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.pagination a:hover,
+a[rel="prev"]:hover,
+a[rel="next"]:hover {
+  background: #f6f8fa !important;
+  color: #0366d6 !important;
+  border-color: #d0d7de !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 1px 0 rgba(27,31,35,0.04), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.pagination a:active,
+a[rel="prev"]:active,
+a[rel="next"]:active {
+  background: #edeff2 !important;
+  color: #0366d6 !important;
+  box-shadow: inset 0 1px 0 rgba(27,31,35,0.1) !important;
+  border: 1px solid #d0d7de !important;
+  border-color: #d0d7de !important;
+  transform: none !important;
+  margin: 0 !important;
+  outline: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* Remove retro button styles */
+.btn,
+button {
+  transition: none !important;
+  cursor: pointer !important;
+}
+
+.btn:before,
+.btn:after,
+button:before,
+button:after,
+.btn-default:before,
+.btn-default:after,
+.btn-primary:before,
+.btn-primary:after {
+  display: none !important;
+  content: none !important;
+}
+
+.btn:active,
+button:active,
+.btn-default:active {
+  background: #edeff2 !important;
+  background-color: #edeff2 !important;
+  box-shadow: inset 0 1px 0 rgba(27,31,35,0.1) !important;
+  border: 1px solid #d0d7de !important;
+  border-color: #d0d7de !important;
+  color: #0366d6 !important;
+  margin: 0 !important;
+  transform: none !important;
+  outline: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  transition: none !important;
+}
+
+.btn:hover,
+.btn-default:hover {
+  background: #f6f8fa !important;
+  color: #0366d6 !important;
+}
+
+/* ===== Primary Button Optimization ===== */
+a.btn.btn-primary,
+.btn-primary {
+  background: #0366d6 !important;
+  color: #ffffff !important;
+  border: 1px solid #0366d6 !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: 0 1px 0 rgba(27,31,35,0.04), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+  cursor: pointer !important;
+  transition: background-color 0.1s ease !important;
+  margin: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+a.btn.btn-primary:hover,
+.btn-primary:hover {
+  background: #0256c7 !important;
+  color: #ffffff !important;
+  border-color: #0256c7 !important;
+  text-decoration: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+a.btn.btn-primary:active,
+.btn-primary:active {
+  background: #024ea4 !important;
+  color: #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(27,31,35,0.15) !important;
+  border: 1px solid #024ea4 !important;
+  border-color: #024ea4 !important;
+  transform: none !important;
+  margin: 0 !important;
+  outline: none !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+/* ===== Back to Top Button Optimization ===== */
+#gotop {
+  background-color: #0366d6 !important;
+  border: none !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  width: 90px !important;
+  height: 36px !important;
+  cursor: pointer !important;
+  line-height: 36px !important;
+  text-align: center !important;
+}
+
+#gotop span {
+  color: #ffffff !important;
+  font-size: 16px !important;
+  line-height: 36px !important;
+  display: block !important;
+}
+
+#gotop:hover {
+  background-color: #0256c7 !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15) !important;
+}
+
+#gotop span:hover {
+  color: #ffffff !important;
+}
+
+/* ===== Utterances Comment System Integration ===== */
+
+/* Comment section container */
+section#comment {
+  margin-top: 48px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid #e1e4e8 !important;
+}
+
+/* Comment section title */
+section#comment h2.title {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: #24292e !important;
+  margin-bottom: 16px !important;
+}
+
+/* Utterances iframe will inherit these settings */
+.utterances {
+  max-width: 100% !important;
+}

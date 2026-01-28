@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/index.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/index.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/how-to-use-the-keyboard-on-a-mac-like-on-windows.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/how_to_enable_mouse_side_buttons_on_a_vmware_vm.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/copy_and_paste_content_to_markdown.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/create-a-private-ubuntu-mirror.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/create-socks-server-on-ubuntu20.04.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/disable-vbs-on-windows-11-24h2.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/how-to-detect-and-solve-port-occupancy-in-linux.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/how-to-enable-font-ligatures-in-vscode.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/how-to-mount-vmware-shared-folder-to-ubuntu-on-boot.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/how-to-run-vmware-16.2.3-on-ubuntu-22.04.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/improve-your-ubuntu-performance.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/monitor-nvme-ssd-status.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/online-expansion-of-ubuntu-lvm-disk.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/remove-news-widgets-of-windows-11-to-improve-performance.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/devops/send-email-with-postfix-on-ubuntu.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/git/common-operations-of-git.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/golang/migrate-mgo-to-qmgo.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/golang/use-pprof-for-golang-program-memory-analysis.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/privacy/how-to-chat-safely-online.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/privacy/personal-note-editing-software-research.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/idea/practical-advice-for-python3-algorithm-practice.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/frontend/install-nodejs-on-linux.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/idea/why-write-this-blog.html</loc>
+    
+    <lastmod>2026-01-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  <url>
+    <loc>https://immortal-blog.github.io/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/macOS/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/Keyboard/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/Karabiner-Elements/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/devops/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/ubuntu/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/linux/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/windows/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/virtualization/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/vmware/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/security/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/idea/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/git/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/golang/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/privacy/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/algorithm/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/tags/frontend/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/devops/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/idea/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/git/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/golang/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/privacy/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://immortal-blog.github.io/categories/frontend/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+</urlset>

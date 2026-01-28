@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Online expansion of Ubuntu LVM disk | Immortal Blog</title>
+  <meta name="author" content="immortalt">
+  
+  <meta name="description" content="An awesome blog about software development and network security.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Online expansion of Ubuntu LVM disk"/>
+  <meta property="og:site_name" content="Immortal Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/prism-line-numbers.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/comment.css" media="screen" type="text/css">
+  <link id="modern-theme-css" rel="stylesheet" href="/css/modern-improvements.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="/js/theme-switcher.js"></script>
+  
+  <!-- analytics -->
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJT0X50ELX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZJT0X50ELX');
+</script>
+
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+ <body>
+   
+
+  <script type="text/javascript">
+    (function(window, document, dataLayerName, id) {
+    window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+    function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString()}document.cookie=a+"="+b+d+"; path=/"}
+    var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+    var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+    tags.async=!0,tags.src="https://immortalt.containers.piwik.pro/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+    !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+    })(window, document, 'dataLayer', '09a725f9-52e4-49d0-9691-6ccab4f70092');
+    </script><noscript><iframe src="https://immortalt.containers.piwik.pro/09a725f9-52e4-49d0-9691-6ccab4f70092/noscript.html" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Immortal Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+		  <li>
+			<a href="#" id="theme-toggle-btn" title="Switch between modern and retro themes">
+			  <i class="fa fa-refresh"></i>Retro Theme
+			</a>
+		  </li>
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">
+			<h1> Online expansion of Ubuntu LVM disk</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h2 id="LVM-overview"><a href="#LVM-overview" class="headerlink" title="LVM overview"></a>LVM overview</h2><p><img src="/images/online-expansion-of-ubuntu-lvm-disk/lvm.png" alt="lvm"></p>
+<h3 id="Physical-Volume-PV"><a href="#Physical-Volume-PV" class="headerlink" title="Physical Volume (PV)"></a>Physical Volume (PV)</h3><p>Refers to a disk partition, or a device (such as RAID) that has the same function as a disk partition. It is the basic storage logical block of LVM, but compared with basic physical storage media (such as partitions, disks, etc.), it contains LVM-related Management parameters.</p>
+<h3 id="Volume-Group-VG"><a href="#Volume-Group-VG" class="headerlink" title="Volume Group (VG)"></a>Volume Group (VG)</h3><p>Similar to a physical disk in a non-LVM system, it is composed of one or more physical volumes PV. One or more LVs (logical volumes) can be created on the volume group.</p>
+<h3 id="Logical-Volume-LV"><a href="#Logical-Volume-LV" class="headerlink" title="Logical Volume (LV)"></a>Logical Volume (LV)</h3><p>Similar to disk partitions in non-LVM systems, logical volumes are built on the volume group VG. A file system (such as &#x2F;home or &#x2F;usr, etc.) can be established on the logical volume LV.</p>
+<span id="more"></span>
+
+<h2 id="LVM-Expansion-A-Safe-and-Standard-Guide"><a href="#LVM-Expansion-A-Safe-and-Standard-Guide" class="headerlink" title="LVM Expansion: A Safe and Standard Guide"></a>LVM Expansion: A Safe and Standard Guide</h2><p>This guide provides a step-by-step process for safely expanding an LVM logical volume on Ubuntu.</p>
+<h3 id="Step-1-Create-a-New-Partition"><a href="#Step-1-Create-a-New-Partition" class="headerlink" title="Step 1: Create a New Partition"></a>Step 1: Create a New Partition</h3><p>If you have expanded your virtual machine’s hard disk, you’ll need to create a new partition to use the added space.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Assuming /dev/sda is your primary disk</span>
+<span class="token function">sudo</span> <span class="token function">fdisk</span> /dev/sda<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>Inside <code>fdisk</code>, use <code>n</code> to create a new partition. Follow the prompts, and then use <code>w</code> to write the changes to the partition table. A new partition like <code>/dev/sda3</code> will be created.</p>
+<p>If you’ve added a new physical disk (e.g., <code>/dev/sdb</code>), the process is similar: <code>sudo fdisk /dev/sdb</code>.</p>
+<h3 id="Step-2-Create-a-Physical-Volume-PV"><a href="#Step-2-Create-a-Physical-Volume-PV" class="headerlink" title="Step 2: Create a Physical Volume (PV)"></a>Step 2: Create a Physical Volume (PV)</h3><p><strong>This is a critical step.</strong> The new partition must be initialized as an LVM Physical Volume. <strong>Do not format it with <code>mkfs</code>.</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Replace /dev/sda3 with your new partition's path</span>
+<span class="token function">sudo</span> pvcreate /dev/sda3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>This command flags the partition for LVM use.</p>
+<h3 id="Step-3-Find-Your-Volume-Group-VG-Name"><a href="#Step-3-Find-Your-Volume-Group-VG-Name" class="headerlink" title="Step 3: Find Your Volume Group (VG) Name"></a>Step 3: Find Your Volume Group (VG) Name</h3><p>Use <code>vgdisplay</code> to find the name of the Volume Group you want to expand. On a standard Ubuntu system, this is usually <code>ubuntu-vg</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> vgdisplay<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Look for the <code>VG Name</code> line. Let’s assume it’s <code>ubuntu-vg</code>.</p>
+<h3 id="Step-4-Extend-the-Volume-Group"><a href="#Step-4-Extend-the-Volume-Group" class="headerlink" title="Step 4: Extend the Volume Group"></a>Step 4: Extend the Volume Group</h3><p>Add the newly created Physical Volume to your Volume Group.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Replace ubuntu-vg and /dev/sda3 with your actual VG name and partition</span>
+<span class="token function">sudo</span> vgextend ubuntu-vg /dev/sda3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>After this, <code>vgdisplay</code> should show increased <code>VG Size</code> and <code>Free PE / Size</code>.</p>
+<h3 id="Step-5-Find-Your-Logical-Volume-LV-Path"><a href="#Step-5-Find-Your-Logical-Volume-LV-Path" class="headerlink" title="Step 5: Find Your Logical Volume (LV) Path"></a>Step 5: Find Your Logical Volume (LV) Path</h3><p>Use <code>lvdisplay</code> to find the path of the Logical Volume you wish to expand. It will typically be something like <code>/dev/ubuntu-vg/root</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> lvdisplay<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Note the <code>LV Path</code>.</p>
+<h3 id="Step-6-Extend-the-Logical-Volume"><a href="#Step-6-Extend-the-Logical-Volume" class="headerlink" title="Step 6: Extend the Logical Volume"></a>Step 6: Extend the Logical Volume</h3><p>Now, extend the Logical Volume to use the free space in the Volume Group. You have two common options:</p>
+<p><strong>Option A: Extend by a specific size</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Adds 50GB to the logical volume. Use G for Gigabytes, T for Terabytes.</span>
+<span class="token function">sudo</span> lvextend -L +50G /dev/ubuntu-vg/root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>Option B: Extend to use all available free space (Recommended)</strong><br>This is often the easiest and most useful option.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># The -l +100%FREE flag tells it to use all available space in the VG.</span>
+<span class="token function">sudo</span> lvextend -l +100%FREE /dev/ubuntu-vg/root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Step-7-Resize-the-Filesystem"><a href="#Step-7-Resize-the-Filesystem" class="headerlink" title="Step 7: Resize the Filesystem"></a>Step 7: Resize the Filesystem</h3><p>After expanding the logical volume, you must resize the filesystem on it to actually use the new space.</p>
+<p>First, find the correct filesystem path to use. It’s usually found in the output of <code>df -h</code>. For a standard Ubuntu system, it will be <code>/dev/mapper/ubuntu--vg-root</code>. Notice the double hyphen, which is how the device mapper represents <code>/dev/ubuntu-vg/root</code>.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">df</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>Now, resize it. The command depends on your filesystem type.</p>
+<p><strong>For ext4 (most common on Ubuntu):</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># The -p flag shows progress.</span>
+<span class="token function">sudo</span> resize2fs -p /dev/mapper/ubuntu--vg-root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>For XFS:</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Note: This command uses the mount point (e.g., /), not the device path.</span>
+<span class="token function">sudo</span> xfs_growfs /<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Step-8-Verify-the-Result"><a href="#Step-8-Verify-the-Result" class="headerlink" title="Step 8: Verify the Result"></a>Step 8: Verify the Result</h3><p>Finally, run <code>df -h</code> again. You should see the expanded size reflected for your root filesystem.</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">df</span> -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<hr>
+<h2 id="How-to-Reduce-an-LV-High-Risk"><a href="#How-to-Reduce-an-LV-High-Risk" class="headerlink" title="How to Reduce an LV (High Risk!)"></a>How to Reduce an LV (High Risk!)</h2><p>Shrinking a Logical Volume is a <strong>high-risk operation</strong> that can lead to <strong>permanent data loss</strong> if done incorrectly. Always back up your data before attempting this.</p>
+<p>The cardinal rule is: <strong>You MUST shrink the filesystem BEFORE you shrink the Logical Volume.</strong></p>
+<p>The correct, simplified process is:</p>
+<ol>
+<li><strong>Backup Your Data:</strong> Seriously.</li>
+<li><strong>Unmount the Filesystem (if possible):</strong> It’s safest to do this from a live CD.</li>
+<li><strong>Check the Filesystem:</strong> Run <code>e2fsck -f /dev/mapper/ubuntu--vg-root</code>.</li>
+<li><strong>Shrink the Filesystem:</strong> Shrink it to a size <em>smaller</em> than your target LV size. For example, to shrink to 95G:<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> resize2fs /dev/mapper/ubuntu--vg-root 95G<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><strong>Shrink the Logical Volume:</strong> Now, shrink the LV to a size <em>equal to or slightly larger than</em> the new filesystem size.<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Shrink TO 100G</span>
+<span class="token function">sudo</span> lvreduce -L 100G /dev/ubuntu-vg/root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><strong>Grow Filesystem Again:</strong> It’s good practice to grow the filesystem back to fill the LV completely.<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> resize2fs /dev/mapper/ubuntu--vg-root<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>This process is complex and risky. For most users, expanding disk space is a much safer alternative.</p>
+
+	  
+	  <hr>
+	  <p>Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/frontend/install-nodejs-on-linux.html" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/golang/use-pprof-for-golang-program-memory-analysis.html" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+    <section id="comment">
+      <h2 class="title">Comments</h2>
+      
+         <script>
+           // Determine theme based on user preference
+           const savedTheme = localStorage.getItem('hexo-theme-preference') || 'modern';
+           const utterancesTheme = savedTheme === 'modern'
+             ? 'github-light'
+             : 'photon-dark';
+
+           // Create and configure utterances script
+           const utterancesScript = document.createElement('script');
+           utterancesScript.src = 'https://utteranc.es/client.js';
+           utterancesScript.setAttribute('repo', 'immortal-blog/immortal-blog.github.io');
+           utterancesScript.setAttribute('issue-term', 'pathname');
+           utterancesScript.setAttribute('theme', utterancesTheme);
+           utterancesScript.setAttribute('crossorigin', 'anonymous');
+           utterancesScript.async = true;
+
+           document.getElementById('comment').appendChild(utterancesScript);
+         </script>
+      
+    </section>
+    
+    
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2021-02-07 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/devops/">devops<span>13</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/devops/">devops<span>12</span></a></li> <li><a href="/tags/ubuntu/">ubuntu<span>7</span></a></li> <li><a href="/tags/linux/">linux<span>7</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#LVM-overview"><span class="toc-article-text">LVM overview</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Physical-Volume-PV"><span class="toc-article-text">Physical Volume (PV)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Volume-Group-VG"><span class="toc-article-text">Volume Group (VG)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Logical-Volume-LV"><span class="toc-article-text">Logical Volume (LV)</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#LVM-Expansion-A-Safe-and-Standard-Guide"><span class="toc-article-text">LVM Expansion: A Safe and Standard Guide</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-1-Create-a-New-Partition"><span class="toc-article-text">Step 1: Create a New Partition</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-2-Create-a-Physical-Volume-PV"><span class="toc-article-text">Step 2: Create a Physical Volume (PV)</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-3-Find-Your-Volume-Group-VG-Name"><span class="toc-article-text">Step 3: Find Your Volume Group (VG) Name</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-4-Extend-the-Volume-Group"><span class="toc-article-text">Step 4: Extend the Volume Group</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-5-Find-Your-Logical-Volume-LV-Path"><span class="toc-article-text">Step 5: Find Your Logical Volume (LV) Path</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-6-Extend-the-Logical-Volume"><span class="toc-article-text">Step 6: Extend the Logical Volume</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-7-Resize-the-Filesystem"><span class="toc-article-text">Step 7: Resize the Filesystem</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#Step-8-Verify-the-Result"><span class="toc-article-text">Step 8: Verify the Result</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#How-to-Reduce-an-LV-High-Risk"><span class="toc-article-text">How to Reduce an LV (High Risk!)</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2026 immortalt
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://github.com/wzpan/hexo-theme-freemind" target="_blank">freemind</a> and <a href="https://github.com/blackshow/hexo-theme-freemind.386" target="_blank">freemind.386</a>.
+     <br> Theme by <a target="_blank" rel="noopener" href="https://github.com/immortal-blog/hexo-theme-freemind.386.plus">Freemind.386.plus</a>.
+     <br> Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>.
+</p>
+ </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+</body>
+   </html>
